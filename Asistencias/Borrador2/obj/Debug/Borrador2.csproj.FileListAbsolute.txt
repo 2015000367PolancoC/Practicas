@@ -1,0 +1,13 @@
+C:\Users\Lab\source\repos\Borrador2\Borrador2\bin\Debug\Borrador2.exe.config
+C:\Users\Lab\source\repos\Borrador2\Borrador2\bin\Debug\Borrador2.exe
+C:\Users\Lab\source\repos\Borrador2\Borrador2\bin\Debug\Borrador2.pdb
+C:\Users\Lab\source\repos\Borrador2\Borrador2\obj\Debug\Borrador2.csproj.AssemblyReference.cache
+C:\Users\Lab\source\repos\Borrador2\Borrador2\obj\Debug\Borrador2.Form1.resources
+C:\Users\Lab\source\repos\Borrador2\Borrador2\obj\Debug\Borrador2.Properties.Resources.resources
+C:\Users\Lab\source\repos\Borrador2\Borrador2\obj\Debug\Borrador2.csproj.GenerateResource.cache
+C:\Users\Lab\source\repos\Borrador2\Borrador2\obj\Debug\Borrador2.csproj.CoreCompileInputs.cache
+C:\Users\Lab\source\repos\Borrador2\Borrador2\obj\Debug\Borrador2.exe
+C:\Users\Lab\source\repos\Borrador2\Borrador2\obj\Debug\Borrador2.pdb
+C:\Users\Lab\source\repos\Borrador2\Borrador2\obj\Debug\Borrador2.exe.config
+C:\Users\Lab\source\repos\Borrador2\Borrador2\obj\Debug\Borrador2.Form2.resources
+C:\Users\Lab\source\repos\Borrador2\Borrador2\obj\Debug\Borrador2.menu.resources
