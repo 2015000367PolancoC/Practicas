@@ -28,3 +28,18 @@ C:\Users\Lab\Downloads\Practicas-main\Practicas-main\guia1unidad3\obj\Debug\Prac
 C:\Users\Lab\Downloads\Practicas-main\Practicas-main\guia1unidad3\obj\Debug\guia1unidad3.exe
 C:\Users\Lab\Downloads\Practicas-main\Practicas-main\guia1unidad3\obj\Debug\guia1unidad3.pdb
 C:\Users\Lab\Downloads\Practicas-main\Practicas-main\guia1unidad3\obj\Debug\guia1unidad3.cp.resources
+C:\Users\Lab\Downloads\Practicas-main\Practicas-main\Pagos & Inscripciones\guia1unidad3\bin\Debug\guia1unidad3.exe.config
+C:\Users\Lab\Downloads\Practicas-main\Practicas-main\Pagos & Inscripciones\guia1unidad3\bin\Debug\guia1unidad3.exe
+C:\Users\Lab\Downloads\Practicas-main\Practicas-main\Pagos & Inscripciones\guia1unidad3\bin\Debug\guia1unidad3.pdb
+C:\Users\Lab\Downloads\Practicas-main\Practicas-main\Pagos & Inscripciones\guia1unidad3\obj\Debug\Practica Borrador.csproj.AssemblyReference.cache
+C:\Users\Lab\Downloads\Practicas-main\Practicas-main\Pagos & Inscripciones\guia1unidad3\obj\Debug\guia1unidad3.exe.config
+C:\Users\Lab\Downloads\Practicas-main\Practicas-main\Pagos & Inscripciones\guia1unidad3\obj\Debug\guia1unidad3.Alumnos.resources
+C:\Users\Lab\Downloads\Practicas-main\Practicas-main\Pagos & Inscripciones\guia1unidad3\obj\Debug\guia1unidad3.cp.resources
+C:\Users\Lab\Downloads\Practicas-main\Practicas-main\Pagos & Inscripciones\guia1unidad3\obj\Debug\guia1unidad3.Encargados.resources
+C:\Users\Lab\Downloads\Practicas-main\Practicas-main\Pagos & Inscripciones\guia1unidad3\obj\Debug\guia1unidad3.Inscripciones.resources
+C:\Users\Lab\Downloads\Practicas-main\Practicas-main\Pagos & Inscripciones\guia1unidad3\obj\Debug\guia1unidad3.Menu.resources
+C:\Users\Lab\Downloads\Practicas-main\Practicas-main\Pagos & Inscripciones\guia1unidad3\obj\Debug\guia1unidad3.Properties.Resources.resources
+C:\Users\Lab\Downloads\Practicas-main\Practicas-main\Pagos & Inscripciones\guia1unidad3\obj\Debug\Practica Borrador.csproj.GenerateResource.cache
+C:\Users\Lab\Downloads\Practicas-main\Practicas-main\Pagos & Inscripciones\guia1unidad3\obj\Debug\Practica Borrador.csproj.CoreCompileInputs.cache
+C:\Users\Lab\Downloads\Practicas-main\Practicas-main\Pagos & Inscripciones\guia1unidad3\obj\Debug\guia1unidad3.exe
+C:\Users\Lab\Downloads\Practicas-main\Practicas-main\Pagos & Inscripciones\guia1unidad3\obj\Debug\guia1unidad3.pdb

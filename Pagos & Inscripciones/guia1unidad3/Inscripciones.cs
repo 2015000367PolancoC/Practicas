@@ -24,6 +24,8 @@ namespace guia1unidad3
                 DataSet d = new DataSet();
                 comando.Fill(d, "nombre");
                 dataGridView1.DataSource = d.Tables["nombre"].DefaultView;
+
+
             }
             catch (Exception ex)
             {
@@ -92,7 +94,7 @@ namespace guia1unidad3
                     conexion.Open();
                     SqlCommand comando = new SqlCommand("UPDATE inscripciones set FechaPago = @FechaPago,monto = @monto,NombreEstudiante = @NombreEstudiante,ApellidoEstudiante = @ApellidoEstudiante,Grado = @Grado,NombreEncargado = @NombreEncargado,ApellidoEncargado = @ApellidoEncargado,Direccion = @Direccion WHERE ID = @ID", conexion);
                     comando.Parameters.AddWithValue("@FechaPago", dateTimePicker1.Value);
-                    comando.Parameters.AddWithValue("@monto", Convert.ToInt32(textBox3.Text));
+                    comando.Parameters.AddWithValue("@monto", Convert.ToDecimal(textBox3.Text));
                     comando.Parameters.AddWithValue("@NombreEstudiante", textBox1.Text);
                     comando.Parameters.AddWithValue("@ApellidoEstudiante", textBox2.Text);
                     comando.Parameters.AddWithValue("@Grado", comboBox1.Text);
@@ -184,8 +186,8 @@ namespace guia1unidad3
                 textBox5.Text = dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString();
                 textBox6.Text = dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString();
                 textBox7.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
-                dateTimePicker1.Value = (DateTime)dataGridView1.Rows[e.RowIndex].Cells[1].Value;
                 comboBox1.Text = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
+                dateTimePicker1.Value = (DateTime)dataGridView1.Rows[e.RowIndex].Cells[1].Value;
             }
         }
 
