@@ -1,0 +1,12 @@
+C:\Users\Lab\source\repos\Borrador3\Borrador3\bin\Debug\Borrador3.exe.config
+C:\Users\Lab\source\repos\Borrador3\Borrador3\bin\Debug\Borrador3.exe
+C:\Users\Lab\source\repos\Borrador3\Borrador3\bin\Debug\Borrador3.pdb
+C:\Users\Lab\source\repos\Borrador3\Borrador3\obj\Debug\Borrador3.csproj.AssemblyReference.cache
+C:\Users\Lab\source\repos\Borrador3\Borrador3\obj\Debug\Borrador3.Properties.Resources.resources
+C:\Users\Lab\source\repos\Borrador3\Borrador3\obj\Debug\Borrador3.csproj.GenerateResource.cache
+C:\Users\Lab\source\repos\Borrador3\Borrador3\obj\Debug\Borrador3.csproj.CoreCompileInputs.cache
+C:\Users\Lab\source\repos\Borrador3\Borrador3\obj\Debug\Borrador3.exe
+C:\Users\Lab\source\repos\Borrador3\Borrador3\obj\Debug\Borrador3.pdb
+C:\Users\Lab\source\repos\Borrador3\Borrador3\obj\Debug\Borrador3.exe.config
+C:\Users\Lab\source\repos\Borrador3\Borrador3\obj\Debug\Borrador3.Asistencias.resources
+C:\Users\Lab\source\repos\Borrador3\Borrador3\obj\Debug\Borrador3.Alumnos.resources
