@@ -30,6 +30,8 @@
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -43,12 +45,12 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.administrarAlumnosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.label5 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.button5 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -75,6 +77,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.checkBox1);
             this.groupBox1.Controls.Add(this.button4);
             this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.label4);
@@ -94,6 +97,27 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtrar";
             // 
+            // button4
+            // 
+            this.button4.Enabled = false;
+            this.button4.Location = new System.Drawing.Point(185, 96);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(78, 23);
+            this.button4.TabIndex = 8;
+            this.button4.Text = "Reestablecer";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(142, 96);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(37, 23);
+            this.button3.TabIndex = 7;
+            this.button3.Text = "Ver";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -105,6 +129,7 @@
             // 
             // dateTimePicker1
             // 
+            this.dateTimePicker1.Enabled = false;
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker1.Location = new System.Drawing.Point(48, 45);
             this.dateTimePicker1.Name = "dateTimePicker1";
@@ -146,7 +171,7 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(9, 71);
+            this.radioButton2.Location = new System.Drawing.Point(8, 71);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(54, 17);
             this.radioButton2.TabIndex = 3;
@@ -209,6 +234,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button5);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.dateTimePicker2);
@@ -219,9 +245,18 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Insertar";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 26);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(37, 13);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Fecha";
+            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(75, 50);
+            this.button1.Location = new System.Drawing.Point(32, 50);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 7;
@@ -237,15 +272,6 @@
             this.dateTimePicker2.Size = new System.Drawing.Size(121, 20);
             this.dateTimePicker2.TabIndex = 3;
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 26);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(37, 13);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "Fecha";
-            // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(69, 129);
@@ -254,27 +280,30 @@
             this.button2.TabIndex = 8;
             this.button2.Text = "Generar Estadisticas";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button3
+            // checkBox1
             // 
-            this.button3.Location = new System.Drawing.Point(142, 96);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(37, 23);
-            this.button3.TabIndex = 7;
-            this.button3.Text = "Ver";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.Location = new System.Drawing.Point(75, 71);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(94, 17);
+            this.checkBox1.TabIndex = 9;
+            this.checkBox1.Text = "Todos los dias";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
-            // button4
+            // button5
             // 
-            this.button4.Enabled = false;
-            this.button4.Location = new System.Drawing.Point(185, 96);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(78, 23);
-            this.button4.TabIndex = 8;
-            this.button4.Text = "Reestablecer";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.button5.Location = new System.Drawing.Point(113, 50);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 10;
+            this.button5.Text = "Actualizar";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // Asistencias
             // 
@@ -288,7 +317,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Asistencias";
-            this.Text = "Grado";
+            this.Text = "Registro de Asistencia";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -325,6 +354,8 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Button button5;
     }
 }
 
