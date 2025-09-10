@@ -1,7 +1,33 @@
-[que.txt](https://github.com/user-attachments/files/22145749/que.txt)
-antes de insertar el monto, revisar si el nombre del alumno ya esta en la base alumnos, mismo con el encargado, si no lo esta, agregarlos a esta base de datos antes de insertar el monto de inscripcion,
+private void ExportSqlTableToExistingExcel(string filePath)
+{
+    SqlDataAdapter da = new SqlDataAdapter("SELECT a.nombres_alumno AS 'Nombre',a.apellidos_alumno AS 'Apellido', a.grado AS 'Grado', s.fecha AS 'Fecha',s.estado AS 'Presente' from info_alumnos a INNER JOIN asistencias s ON a.id_alumno = s.id_alumno", conexion);
+    DataTable dt = new DataTable();
+    da.Fill(dt);
 
-el monto actual se deberia de llamar inscripcion, y cuando se ponga en codigo, el residuo de los 600 se pongan en una variable transitora publica, para que se pueda llamar pagos(residuo) y ponerlo de una vez en los meses necesarios.
+    // Abre el archivo existente
+    using (var package = new ExcelPackage(new System.IO.FileInfo(filePath)))
+    {
+        // Usa la primera hoja o crea una si no existe
+        var worksheet = package.Workbook.Worksheets.FirstOrDefault() ?? package.Workbook.Worksheets.Add("Sheet1");
 
-El usuario no deberia de tener que andar revisando ID´s,
+        // Opcional: limpia la hoja antes de escribir (si quieres sobrescribir)
+        worksheet.Cells.Clear();
 
+        // Escribe encabezados
+        for (int i = 0; i < dt.Columns.Count; i++)
+        {
+            worksheet.Cells[1, i + 1].Value = dt.Columns[i].ColumnName;
+        }
+
+        // Escribe filas
+        for (int x = 0; x < dt.Rows.Count; x++)
+        {
+            for (int y = 0; y < dt.Columns.Count; y++)
+            {
+                worksheet.Cells[x + 2, y + 1].Value = dt.Rows[x][y];
+            }
+        }
+
+        package.Save();
+    }
+}
