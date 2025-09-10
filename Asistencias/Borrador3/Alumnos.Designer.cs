@@ -40,7 +40,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnLimpiarFiltro = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -164,11 +169,59 @@
             this.comboBox1.Size = new System.Drawing.Size(112, 21);
             this.comboBox1.TabIndex = 13;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.btnLimpiarFiltro);
+            this.groupBox3.Controls.Add(this.label8);
+            this.groupBox3.Controls.Add(this.comboBox2);
+            this.groupBox3.Location = new System.Drawing.Point(324, 6);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(186, 74);
+            this.groupBox3.TabIndex = 14;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Filtrar";
+            // 
+            // btnLimpiarFiltro
+            // 
+            this.btnLimpiarFiltro.Location = new System.Drawing.Point(56, 45);
+            this.btnLimpiarFiltro.Name = "btnLimpiarFiltro";
+            this.btnLimpiarFiltro.Size = new System.Drawing.Size(79, 23);
+            this.btnLimpiarFiltro.TabIndex = 14;
+            this.btnLimpiarFiltro.Text = "Reestablecer";
+            this.btnLimpiarFiltro.UseVisualStyleBackColor = true;
+            this.btnLimpiarFiltro.Click += new System.EventHandler(this.btnLimpiarFiltro_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 26);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(36, 13);
+            this.label8.TabIndex = 11;
+            this.label8.Text = "Grado";
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "Primero Basico",
+            "Segundo Basico",
+            "Tercero Basico",
+            "Cuarto Bachillerato",
+            "Quinto Bachillerato"});
+            this.comboBox2.Location = new System.Drawing.Point(56, 22);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(121, 21);
+            this.comboBox2.TabIndex = 10;
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            // 
             // Alumnos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(520, 450);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -186,7 +239,10 @@
             this.Name = "Alumnos";
             this.Text = "Alumnos";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Alumnos_FormClosed);
+            this.Load += new System.EventHandler(this.Alumnos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -206,5 +262,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button btnLimpiarFiltro;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox comboBox2;
     }
 }

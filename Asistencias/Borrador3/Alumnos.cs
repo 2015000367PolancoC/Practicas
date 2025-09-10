@@ -9,7 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-
 namespace Borrador3
 {
     public partial class Alumnos : Form
@@ -23,13 +22,12 @@ namespace Borrador3
             asistenciasForm = asistencias;
             registros();
         }
-
         private void registros()
         {
             try
             {
                 conexion.Open();
-                SqlDataAdapter comando = new SqlDataAdapter("select id_alumno as 'Codigo',nombres_alumno as 'Nombre',apellidos_alumno as 'Apellido',grado as 'Grado' from info_alumnos;", conexion);
+                SqlDataAdapter comando = new SqlDataAdapter("select id_alumno as 'Codigo',nombres_alumno AS 'Nombre',apellidos_alumno AS 'Apellido',grado AS 'Grado' from info_alumnos\r\nORDER BY \r\n    CASE \r\n        WHEN grado = 'Primero Basico' THEN 1\r\n        WHEN grado = 'Segundo Basico' THEN 2\r\n        WHEN grado = 'Tercero Basico' THEN 3\r\n        WHEN grado = 'Cuarto Bachillerato' THEN 4\r\n        WHEN grado = 'Quinto Bachillerato' THEN 5\r\n        ELSE 1000\r\n    END asc, apellidos_alumno asc;", conexion);
                 DataSet d = new DataSet();
                 comando.Fill(d, "nombre");
                 dataGridView1.DataSource = d.Tables["nombre"].DefaultView;
@@ -62,7 +60,6 @@ namespace Borrador3
                     comando.ExecuteNonQuery();
                     MessageBox.Show("Agregado exitosamente");
                 }
-
             }
             catch (Exception ex)
             {
@@ -74,12 +71,6 @@ namespace Borrador3
                 registros();
             }
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button3_Click(object sender, EventArgs e)
         {
             try
@@ -99,7 +90,6 @@ namespace Borrador3
                     comando.ExecuteNonQuery();
                     MessageBox.Show("Actualizado exitosamente");
                 }
-
             }
             catch (Exception ex)
             {
@@ -111,7 +101,6 @@ namespace Borrador3
                 registros();
             }
         }
-
         private void button4_Click(object sender, EventArgs e)
         {
             try
@@ -127,7 +116,6 @@ namespace Borrador3
                     comando.ExecuteNonQuery();
                     MessageBox.Show("Eliminado exitosamente");
                 }
-
             }
             catch (Exception ex)
             {
@@ -139,7 +127,6 @@ namespace Borrador3
                 registros();
             }
         }
-
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
@@ -148,16 +135,45 @@ namespace Borrador3
                 textBox2.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
                 comboBox1.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
                 textBox4.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
-                
             }
         }
-
         private void Alumnos_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (asistenciasForm != null)
             {
-                asistenciasForm.fein();
+                asistenciasForm.eliminarcolumna();
+                asistenciasForm.agregarcolumna();
             }
+        }
+
+        private void Alumnos_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                conexion.Open();
+                SqlDataAdapter comando = new SqlDataAdapter("select id_alumno as 'Codigo',nombres_alumno AS 'Nombre',apellidos_alumno AS 'Apellido',grado AS 'Grado' from info_alumnos where grado = '"+comboBox2.SelectedItem.ToString()+"'\r\nORDER BY \r\n    CASE \r\n        WHEN grado = 'Primero Basico' THEN 1\r\n        WHEN grado = 'Segundo Basico' THEN 2\r\n        WHEN grado = 'Tercero Basico' THEN 3\r\n        WHEN grado = 'Cuarto Bachillerato' THEN 4\r\n        WHEN grado = 'Quinto Bachillerato' THEN 5\r\n        ELSE 1000\r\n    END asc, apellidos_alumno asc;", conexion);
+                DataSet d = new DataSet();
+                comando.Fill(d, "nombre");
+                dataGridView1.DataSource = d.Tables["nombre"].DefaultView;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al consultar la base de datos: " + ex.Message);
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
+        private void btnLimpiarFiltro_Click(object sender, EventArgs e)
+        {
+            registros();
+            comboBox2.SelectedIndex = 0; // Deseleccionar cualquier selección en el ComboBox
         }
     }
 }

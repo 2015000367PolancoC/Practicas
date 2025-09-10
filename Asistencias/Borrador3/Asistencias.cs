@@ -1,20 +1,14 @@
 ﻿using OfficeOpenXml;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
 using System.Linq;
-using System.Security.Permissions;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-
 namespace Borrador3
 {
     public partial class Asistencias : Form
     {
+        String consultafiltro = "SELECT a.nombres_alumno AS 'Nombre',a.apellidos_alumno AS 'Apellido', a.grado AS 'Grado', s.fecha AS 'Fecha',s.estado AS 'Presente' from info_alumnos a INNER JOIN asistencias s ON a.id_alumno = s.id_alumno ";
         SqlConnection conexion = new SqlConnection("Data Source=localhost\\SQLEXPRESS;Initial Catalog=asistencias_control;Integrated Security=True");
         public Asistencias()
         {
@@ -27,17 +21,23 @@ namespace Borrador3
             try
             {
                 conexion.Open();
-                SqlDataAdapter comando = new SqlDataAdapter("select nombres_alumno as 'Nombre',apellidos_alumno as 'Apellido',grado as 'Grado' from info_alumnos;", conexion);
-                DataSet d = new DataSet();
-                comando.Fill(d, "nombre");
-                dataGridView1.DataSource = d.Tables["nombre"].DefaultView;
-
-                chk.HeaderText = "Presente";
-                chk.Name = "estado";
-                chk.TrueValue = true;
-                chk.FalseValue = false;
-
-                dataGridView1.Columns.Add(chk);
+                SqlDataAdapter comando = new SqlDataAdapter
+                    (
+                        "SELECT nombres_alumno AS 'Nombre',apellidos_alumno AS 'Apellido',grado AS 'Grado' from info_alumnos\r\n" +
+                        "ORDER BY \r\n" +
+                        "    CASE \r\n" +
+                        "        WHEN grado = 'Primero Basico' THEN 1\r\n" +
+                        "        WHEN grado = 'Segundo Basico' THEN 2\r\n" +
+                        "        WHEN grado = 'Tercero Basico' THEN 3\r\n" +
+                        "        WHEN grado = 'Cuarto Bachillerato' THEN 4\r\n" +
+                        "        WHEN grado = 'Quinto Bachillerato' THEN 5\r\n" +
+                        "        ELSE 1000\r\n" +
+                        "    END asc, apellidos_alumno asc;"
+                    ,conexion);
+                DataSet dt = new DataSet();
+                comando.Fill(dt, "nombre");
+                dataGridView1.DataSource = dt.Tables["nombre"].DefaultView;
+                
             }
             catch (Exception ex)
             {
@@ -48,10 +48,18 @@ namespace Borrador3
                 conexion.Close();
             }
         }
-        public void fein()
+        public void eliminarcolumna()
         {
             // :(
             dataGridView1.Columns.Remove("estado");
+        }
+        public void agregarcolumna()
+        {
+            chk.HeaderText = "Presente";
+            chk.Name = "estado";
+            chk.TrueValue = true;
+            chk.FalseValue = false;
+            dataGridView1.Columns.Add(chk);
         }
         private void limpiarfiltros()
         {
@@ -61,32 +69,50 @@ namespace Borrador3
             textBox2.Clear();
             comboBox1.SelectedIndex = 0;
             dataGridView1.ReadOnly = false;
-            button3.Enabled = true;
-            button4.Enabled = false;
+            btnVerReg.Enabled = true;
+            btnLimpiarReg.Enabled = false;
             dateTimePicker1.Value = DateTime.Now;
         }
-        private void Form1_Load(object sender, EventArgs e)
+        private void limpiarregistros()
         {
-            // When la columna que agregas de ultimo tiene magicamente el index puesto a 0 y tienes que refrescarla por que no sabes programar bien alv cfffffffff
-            dataGridView1.Columns.Remove("estado");
-            registros();
+            textBox3.Clear();
+            textBox4.Clear();
+            comboBox2.SelectedIndex = 0;
+            radioButton3.Checked = false;
+            radioButton4.Checked = false;
+        }
+        private void Form1_Load(object sender, EventArgs e)
+        { 
+            agregarcolumna();
             comboBox1.SelectedIndex = 0;
+            comboBox2.SelectedIndex = 0;
         }
         private void ExportSqlTableToExcel(string filePath)
-        {
-            SqlDataAdapter da = new SqlDataAdapter("SELECT a.nombres_alumno AS 'Nombre',a.apellidos_alumno AS 'Apellido', a.grado AS 'Grado', s.fecha AS 'Fecha',s.estado AS 'Presente' from info_alumnos a INNER JOIN asistencias s ON a.id_alumno = s.id_alumno", conexion);
+        { //Creditos a so
+            SqlDataAdapter da = new SqlDataAdapter(consultafiltro +
+                        "ORDER BY \r\n" +
+                        "    CASE \r\n" +
+                        "        WHEN grado = 'Primero Basico' THEN 1\r\n" +
+                        "        WHEN grado = 'Segundo Basico' THEN 2\r\n" +
+                        "        WHEN grado = 'Tercero Basico' THEN 3\r\n" +
+                        "        WHEN grado = 'Cuarto Bachillerato' THEN 4\r\n" +
+                        "        WHEN grado = 'Quinto Bachillerato' THEN 5\r\n" +
+                        "        ELSE 1000\r\n" +
+                        "    END asc, apellidos_alumno asc;", conexion);
             DataTable dt = new DataTable();
             da.Fill(dt);
 
-            using (var package = new ExcelPackage())
+            // Abre el archivo existente
+            using (var package = new ExcelPackage(new System.IO.FileInfo(filePath)))
             {
-                var worksheet = package.Workbook.Worksheets.Add("Sheet1");
+                var worksheet = package.Workbook.Worksheets.FirstOrDefault();
 
                 for (int i = 0; i < dt.Columns.Count; i++)
                 {
                     worksheet.Cells[1, i + 1].Value = dt.Columns[i].ColumnName;
                 }
 
+                // Escribe filas
                 for (int x = 0; x < dt.Rows.Count; x++)
                 {
                     for (int y = 0; y < dt.Columns.Count; y++)
@@ -94,91 +120,103 @@ namespace Borrador3
                         worksheet.Cells[x + 2, y + 1].Value = dt.Rows[x][y];
                     }
                 }
-
-                package.SaveAs(new System.IO.FileInfo(filePath));
+                try
+                {
+                    package.Save();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al guardar el archivo: " + ex.Message);
+                }
             }
+
         }
+
         private void administrarAlumnosToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            limpiarfiltros();
+            registros();
+            eliminarcolumna();
+            agregarcolumna();
             Alumnos v = new Alumnos(this);
             v.FormClosed += (s, args) => registros();
             v.Show();
         }
-
+        private void filtrar(String query)
+        {
+            try
+            {
+                eliminarcolumna();
+                conexion.Open();
+                SqlDataAdapter comando = new SqlDataAdapter(query + "ORDER BY \r\n    CASE \r\n        WHEN grado = 'Primero Basico' THEN 1\r\n        WHEN grado = 'Segundo Basico' THEN 2\r\n        WHEN grado = 'Tercero Basico' THEN 3\r\n        WHEN grado = 'Cuarto Bachillerato' THEN 4\r\n        WHEN grado = 'Quinto Bachillerato' THEN 5\r\n        ELSE 1000\r\n    END asc, apellidos_alumno asc", conexion);
+                DataSet dt = new DataSet();
+                comando.Fill(dt, "nombre");
+                dataGridView1.DataSource = dt.Tables["nombre"].DefaultView;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al consultar la base de datos: " + ex.Message);
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
         private void button3_Click(object sender, EventArgs e)
         {
-            if (radioButton2.Checked && comboBox1.SelectedIndex > 0)
+            if (radioButton2.Checked)
             {
-                if (!checkBox1.Checked)
+                if (comboBox1.SelectedIndex == 0)
                 {
-                    try
+                    if (!checkBox1.Checked)
                     {
-                        dataGridView1.Columns.Remove("estado");
-                        conexion.Open();
-                        SqlDataAdapter comando = new SqlDataAdapter("select a.nombres_alumno as 'Nombre',a.apellidos_alumno as 'Apellido', a.grado as 'Grado', s.fecha as 'Fecha',s.estado as 'Presente' from info_alumnos a inner join asistencias s on a.id_alumno = s.id_alumno where grado ='" + comboBox1.SelectedItem.ToString() + "'AND fecha ='" + dateTimePicker1.Value + "';", conexion);
-                        DataSet d = new DataSet();
-                        comando.Fill(d, "nombre");
-                        dataGridView1.DataSource = d.Tables["nombre"].DefaultView;
+                        filtrar(consultafiltro + "where fecha ='" + dateTimePicker1.Value + "'");
                         dataGridView1.ReadOnly = true;
+                        btnVerReg.Enabled = false;
+                        btnLimpiarReg.Enabled = true;
+                        //Workaround por que crashea si se abre mientras haya un filtro activo
+                        btnAlumnos.Enabled = false;
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        MessageBox.Show("Error al consultar la base de datos: " + ex.Message);
-                    }
-                    finally
-                    {
-                        conexion.Close();
-                        button3.Enabled = false;
-                        button4.Enabled = true;
+                        filtrar(consultafiltro);
+                        dataGridView1.ReadOnly = true;
+                        btnVerReg.Enabled = false;
+                        btnLimpiarReg.Enabled = true;
+                        //Workaround por que crashea si se abre mientras haya un filtro activo
+                        btnAlumnos.Enabled = false;
                     }
                 }
                 else
                 {
-                    try
+                    if (!checkBox1.Checked)
                     {
-                        dataGridView1.Columns.Remove("estado");
-                        conexion.Open();
-                        SqlDataAdapter comando = new SqlDataAdapter("select a.nombres_alumno as 'Nombre',a.apellidos_alumno as 'Apellido', a.grado as 'Grado', s.fecha as 'Fecha',s.estado as 'Presente' from info_alumnos a inner join asistencias s on a.id_alumno = s.id_alumno where grado ='" + comboBox1.SelectedItem.ToString() + "';", conexion);
-                        DataSet d = new DataSet();
-                        comando.Fill(d, "nombre");
-                        dataGridView1.DataSource = d.Tables["nombre"].DefaultView;
+                        filtrar(consultafiltro + " where grado ='" + comboBox1.SelectedItem.ToString() + "'AND fecha ='" + dateTimePicker1.Value + "'");
                         dataGridView1.ReadOnly = true;
+                        btnVerReg.Enabled = false;
+                        btnLimpiarReg.Enabled = true;
+                        //Workaround por que crashea si se abre mientras haya un filtro activo
+                        btnAlumnos.Enabled = false;
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        MessageBox.Show("Error al consultar la base de datos: " + ex.Message);
-                    }
-                    finally
-                    {
-                        conexion.Close();
-                        button3.Enabled = false;
-                        button4.Enabled = true;
+                        filtrar(consultafiltro + "where grado ='" + comboBox1.SelectedItem.ToString() + "'");
+                        dataGridView1.ReadOnly = true;
+                        btnVerReg.Enabled = false;
+                        btnLimpiarReg.Enabled = true;
+                        //Workaround por que crashea si se abre mientras haya un filtro activo
+                        btnAlumnos.Enabled = false;
                     }
                 }
             }
-            else if(radioButton1.Checked && textBox1.Text != "" && textBox2.Text != "")
+            else if (radioButton1.Checked && textBox1.Text != "" && textBox2.Text != "")
             {
-                try
-                {
-                    dataGridView1.Columns.Remove("estado");
-                    conexion.Open();
-                    SqlDataAdapter comando = new SqlDataAdapter("select a.nombres_alumno as 'Nombre',a.apellidos_alumno as 'Apellido', a.grado as 'Grado', s.fecha as 'Fecha',s.estado as 'Presente' from info_alumnos a inner join asistencias s on a.id_alumno = s.id_alumno where nombres_alumno='" + textBox1.Text + "' and apellidos_alumno='" + textBox2.Text + "';", conexion);
-                    DataSet d = new DataSet();
-                    comando.Fill(d, "nombre");
-                    dataGridView1.DataSource = d.Tables["nombre"].DefaultView;
-                    dataGridView1.ReadOnly = true;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al consultar la base de datos: " + ex.Message);
-                }
-                finally
-                {
-                    conexion.Close();
-                    button3.Enabled = false;
-                    button4.Enabled = true;
-                }
-
+                filtrar(consultafiltro + "where nombres_alumno='" + textBox1.Text + "' and apellidos_alumno='" + textBox2.Text + "'");
+                dataGridView1.ReadOnly = true;
+                btnVerReg.Enabled = false;
+                btnLimpiarReg.Enabled = true;
+                //Workaround por que crashea si se abre mientras haya un filtro activo
+                btnAlumnos.Enabled = false;
             }
             else
             {
@@ -186,6 +224,7 @@ namespace Borrador3
                 dataGridView1.Columns.Remove("estado");
                 limpiarfiltros();
                 registros();
+                agregarcolumna();
             }
         }
 
@@ -193,12 +232,17 @@ namespace Borrador3
         {
             limpiarfiltros();
             registros();
+            agregarcolumna();
+            btnAlumnos.Enabled = true;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             textBox1.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
             textBox2.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
+
+            textBox3.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+            textBox4.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -234,7 +278,7 @@ namespace Borrador3
                             insertar.Parameters.AddWithValue("@fecha", dateTimePicker2.Value.Date);
                             insertar.Parameters.AddWithValue("@estado", presente);
                             insertar.ExecuteNonQuery();
-                            
+
                         }
                     }
                 }
@@ -249,23 +293,9 @@ namespace Borrador3
                 conexion.Close();
             }
         }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Filter = "Excel files (*.txt)|*.txt|All files (*.*)|*.*";
-            saveFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            saveFileDialog1.FileName = "Estadisticas.xlsx";
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                string filePath = saveFileDialog1.FileName;
-                ExportSqlTableToExcel(filePath);
-            }
-        }
-
         private void button5_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Estas seguro? esto cambiara todos los datos del dia.", "Confirmar", MessageBoxButtons.YesNo);
+            DialogResult dialogResult = MessageBox.Show("Estas seguro?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.Yes)
             {
                 try
@@ -285,9 +315,9 @@ namespace Borrador3
                         cmd.Parameters.AddWithValue("@grado", grado);
 
                         object result = cmd.ExecuteScalar();
-                        if (result != null) 
+                        if (result != null)
                             idAlumno = Convert.ToInt32(result);
-                        
+
 
                         if (idAlumno != -1)
                         {
@@ -303,7 +333,7 @@ namespace Borrador3
                                 updateCmd.Parameters.AddWithValue("@fecha", dateTimePicker2.Value.Date);
                                 updateCmd.Parameters.AddWithValue("@estado", presente);
                                 updateCmd.ExecuteNonQuery();
-                                    
+
                             }
                         }
                     }
@@ -329,6 +359,50 @@ namespace Borrador3
             {
                 dateTimePicker1.Enabled = true;
             }
+        }
+
+        private void generarEstadisticasToolStripMenuItem_Click(object sender, EventArgs e)
+        { //Creditos especiales al departamento de computacion del don bosco por NO enseñarme a llamar el Guardar como.
+            SaveFileDialog s = new SaveFileDialog();
+            s.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
+            s.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            s.FileName = "Estadisticas.xlsx";
+            if (s.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = s.FileName;
+                ExportSqlTableToExcel(filePath);
+            }
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            eliminarcolumna();
+            limpiarregistros();
+            registros();
+        }
+
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+            filtrar("select nombres_alumno AS 'Nombre',apellidos_alumno AS 'Apellido',grado AS 'Grado' from info_alumnos where grado = '" + comboBox2.SelectedItem.ToString() + "'");
+            agregarcolumna();
+        }
+
+        private void radioButton4_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                filtrar("select nombres_alumno as 'Nombre',apellidos_alumno as 'Apellido',grado as 'Grado' from info_alumnos where nombres_alumno = '" + textBox1.Text + "' and apellidos_alumno = '" + textBox2.Text + "'; ");
+                agregarcolumna();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al consultar la base de datos: " + ex.Message);
+            }
+        }
+
+        private void groupBox3_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

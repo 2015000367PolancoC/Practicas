@@ -30,8 +30,9 @@
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.btnLimpiarReg = new System.Windows.Forms.Button();
+            this.btnVerReg = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -43,18 +44,28 @@
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.administrarAlumnosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnAlumnos = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnActualizar = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnGuardar = new System.Windows.Forms.Button();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.button2 = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.button5 = new System.Windows.Forms.Button();
+            this.btnEstadisticas = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.btnLimpiarFiltro = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -68,7 +79,7 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(12, 157);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(607, 312);
+            this.dataGridView1.Size = new System.Drawing.Size(736, 312);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
@@ -78,8 +89,8 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.checkBox1);
-            this.groupBox1.Controls.Add(this.button4);
-            this.groupBox1.Controls.Add(this.button3);
+            this.groupBox1.Controls.Add(this.btnLimpiarReg);
+            this.groupBox1.Controls.Add(this.btnVerReg);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.dateTimePicker1);
             this.groupBox1.Controls.Add(this.textBox2);
@@ -90,33 +101,46 @@
             this.groupBox1.Controls.Add(this.radioButton1);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Location = new System.Drawing.Point(255, 27);
+            this.groupBox1.Location = new System.Drawing.Point(390, 27);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(364, 125);
+            this.groupBox1.Size = new System.Drawing.Size(358, 125);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Filtrar";
+            this.groupBox1.Text = "Revisar Asistencias";
             // 
-            // button4
+            // checkBox1
             // 
-            this.button4.Enabled = false;
-            this.button4.Location = new System.Drawing.Point(185, 96);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(78, 23);
-            this.button4.TabIndex = 8;
-            this.button4.Text = "Reestablecer";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.Location = new System.Drawing.Point(75, 71);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(94, 17);
+            this.checkBox1.TabIndex = 9;
+            this.checkBox1.Text = "Todos los dias";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
-            // button3
+            // btnLimpiarReg
             // 
-            this.button3.Location = new System.Drawing.Point(142, 96);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(37, 23);
-            this.button3.TabIndex = 7;
-            this.button3.Text = "Ver";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.btnLimpiarReg.Enabled = false;
+            this.btnLimpiarReg.Location = new System.Drawing.Point(185, 96);
+            this.btnLimpiarReg.Name = "btnLimpiarReg";
+            this.btnLimpiarReg.Size = new System.Drawing.Size(78, 23);
+            this.btnLimpiarReg.TabIndex = 8;
+            this.btnLimpiarReg.Text = "Reestablecer";
+            this.btnLimpiarReg.UseVisualStyleBackColor = true;
+            this.btnLimpiarReg.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // btnVerReg
+            // 
+            this.btnVerReg.Location = new System.Drawing.Point(142, 96);
+            this.btnVerReg.Name = "btnVerReg";
+            this.btnVerReg.Size = new System.Drawing.Size(37, 23);
+            this.btnVerReg.TabIndex = 7;
+            this.btnVerReg.Text = "Ver";
+            this.btnVerReg.UseVisualStyleBackColor = true;
+            this.btnVerReg.Click += new System.EventHandler(this.button3_Click);
             // 
             // label4
             // 
@@ -218,99 +242,192 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.administrarAlumnosToolStripMenuItem});
+            this.btnAlumnos,
+            this.btnEstadisticas});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(636, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(765, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // administrarAlumnosToolStripMenuItem
+            // btnAlumnos
             // 
-            this.administrarAlumnosToolStripMenuItem.Name = "administrarAlumnosToolStripMenuItem";
-            this.administrarAlumnosToolStripMenuItem.Size = new System.Drawing.Size(132, 20);
-            this.administrarAlumnosToolStripMenuItem.Text = "Administrar Alumnos";
-            this.administrarAlumnosToolStripMenuItem.Click += new System.EventHandler(this.administrarAlumnosToolStripMenuItem_Click);
+            this.btnAlumnos.Name = "btnAlumnos";
+            this.btnAlumnos.Size = new System.Drawing.Size(132, 20);
+            this.btnAlumnos.Text = "Administrar Alumnos";
+            this.btnAlumnos.Click += new System.EventHandler(this.administrarAlumnosToolStripMenuItem_Click);
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button5);
+            this.groupBox2.Controls.Add(this.btnActualizar);
             this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.btnGuardar);
             this.groupBox2.Controls.Add(this.dateTimePicker2);
             this.groupBox2.Location = new System.Drawing.Point(12, 27);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(237, 96);
+            this.groupBox2.Size = new System.Drawing.Size(179, 124);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Insertar";
             // 
+            // btnActualizar
+            // 
+            this.btnActualizar.Location = new System.Drawing.Point(96, 51);
+            this.btnActualizar.Name = "btnActualizar";
+            this.btnActualizar.Size = new System.Drawing.Size(75, 23);
+            this.btnActualizar.TabIndex = 10;
+            this.btnActualizar.Text = "Actualizar";
+            this.btnActualizar.UseVisualStyleBackColor = true;
+            this.btnActualizar.Click += new System.EventHandler(this.button5_Click);
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 26);
+            this.label5.Location = new System.Drawing.Point(7, 23);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(37, 13);
             this.label5.TabIndex = 7;
             this.label5.Text = "Fecha";
             // 
-            // button1
+            // btnGuardar
             // 
-            this.button1.Location = new System.Drawing.Point(32, 50);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Guardar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnGuardar.Location = new System.Drawing.Point(15, 51);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(75, 23);
+            this.btnGuardar.TabIndex = 7;
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.button1_Click);
             // 
             // dateTimePicker2
             // 
             this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker2.Location = new System.Drawing.Point(49, 21);
+            this.dateTimePicker2.Location = new System.Drawing.Point(50, 21);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(121, 20);
             this.dateTimePicker2.TabIndex = 3;
             // 
-            // button2
+            // btnEstadisticas
             // 
-            this.button2.Location = new System.Drawing.Point(69, 129);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(113, 23);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "Generar Estadisticas";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnEstadisticas.Name = "btnEstadisticas";
+            this.btnEstadisticas.Size = new System.Drawing.Size(123, 20);
+            this.btnEstadisticas.Text = "Generar Estadisticas";
+            this.btnEstadisticas.Click += new System.EventHandler(this.generarEstadisticasToolStripMenuItem_Click);
             // 
-            // checkBox1
+            // groupBox3
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = true;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(75, 71);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(94, 17);
-            this.checkBox1.TabIndex = 9;
-            this.checkBox1.Text = "Todos los dias";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.groupBox3.Controls.Add(this.btnLimpiarFiltro);
+            this.groupBox3.Controls.Add(this.label8);
+            this.groupBox3.Controls.Add(this.textBox3);
+            this.groupBox3.Controls.Add(this.comboBox2);
+            this.groupBox3.Controls.Add(this.textBox4);
+            this.groupBox3.Controls.Add(this.radioButton4);
+            this.groupBox3.Controls.Add(this.label6);
+            this.groupBox3.Controls.Add(this.radioButton3);
+            this.groupBox3.Controls.Add(this.label7);
+            this.groupBox3.Location = new System.Drawing.Point(197, 27);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(187, 124);
+            this.groupBox3.TabIndex = 4;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Filtrar";
+            this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
             // 
-            // button5
+            // radioButton3
             // 
-            this.button5.Location = new System.Drawing.Point(113, 50);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 10;
-            this.button5.Text = "Actualizar";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(10, 94);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(54, 17);
+            this.radioButton3.TabIndex = 4;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "Grado";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged);
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Location = new System.Drawing.Point(70, 94);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(62, 17);
+            this.radioButton4.TabIndex = 10;
+            this.radioButton4.TabStop = true;
+            this.radioButton4.Text = "Nombre";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged);
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(58, 15);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(121, 20);
+            this.textBox3.TabIndex = 10;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(58, 41);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(121, 20);
+            this.textBox4.TabIndex = 11;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(8, 44);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(44, 13);
+            this.label6.TabIndex = 13;
+            this.label6.Text = "Apellido";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(8, 22);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(44, 13);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "Nombre";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(8, 71);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(36, 13);
+            this.label8.TabIndex = 11;
+            this.label8.Text = "Grado";
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "Primero Basico",
+            "Segundo Basico",
+            "Tercero Basico",
+            "Cuarto Bachillerato",
+            "Quinto Bachillerato"});
+            this.comboBox2.Location = new System.Drawing.Point(58, 67);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(121, 21);
+            this.comboBox2.TabIndex = 10;
+            // 
+            // btnLimpiarFiltro
+            // 
+            this.btnLimpiarFiltro.Location = new System.Drawing.Point(138, 94);
+            this.btnLimpiarFiltro.Name = "btnLimpiarFiltro";
+            this.btnLimpiarFiltro.Size = new System.Drawing.Size(41, 23);
+            this.btnLimpiarFiltro.TabIndex = 14;
+            this.btnLimpiarFiltro.UseVisualStyleBackColor = true;
+            this.btnLimpiarFiltro.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // Asistencias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(636, 482);
-            this.Controls.Add(this.button2);
+            this.ClientSize = new System.Drawing.Size(765, 482);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
@@ -326,6 +443,8 @@
             this.menuStrip1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -346,16 +465,26 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem administrarAlumnosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem btnAlumnos;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnVerReg;
+        private System.Windows.Forms.Button btnLimpiarReg;
         private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button btnActualizar;
+        private System.Windows.Forms.ToolStripMenuItem btnEstadisticas;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button btnLimpiarFiltro;
     }
 }
 

@@ -10,13 +10,12 @@ create table info_alumnos(
 	grado varchar(50) not null
 );
 GO
-
 create table asistencias(
 	id_asistencia int identity primary key,
 	id_alumno int,
 	fecha date,
 	estado bit,
-	foreign key(id_alumno) references info_alumnos(id_alumno)	
+	foreign key(id_alumno) references info_alumnos(id_alumno) on delete cascade
 );
 GO
  
@@ -135,3 +134,16 @@ values
 
 
 select a.nombres_alumno as 'Nombre',a.apellidos_alumno as 'Apellido', a.grado as 'Grado', s.fecha as 'Fecha',s.estado as 'Presente' from info_alumnos a inner join asistencias s on a.id_alumno = s.id_alumno where grado='Primero basico';
+
+SELECT nombres_alumno AS 'Nombre',apellidos_alumno AS 'Apellido',grado AS 'Grado' from info_alumnos where grado = 'Segundo Basico'
+ORDER BY 
+    CASE 
+        WHEN grado = 'Primero Basico' THEN 1
+        WHEN grado = 'Segundo Basico' THEN 2
+        WHEN grado = 'Tercero Basico' THEN 3
+        WHEN grado = 'Cuarto Bachillerato' THEN 4
+        WHEN grado = 'Quinto Bachillerato' THEN 5
+        ELSE 1000
+    END asc, apellidos_alumno asc;
+
+	select * from asistencias;
