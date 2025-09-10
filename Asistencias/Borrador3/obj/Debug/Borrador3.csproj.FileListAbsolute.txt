@@ -22,3 +22,18 @@ C:\Users\Lab\source\repos\Asistencias\Borrador3\obj\Debug\Borrador3.csproj.Gener
 C:\Users\Lab\source\repos\Asistencias\Borrador3\obj\Debug\Borrador3.csproj.CoreCompileInputs.cache
 C:\Users\Lab\source\repos\Asistencias\Borrador3\obj\Debug\Borrador3.exe
 C:\Users\Lab\source\repos\Asistencias\Borrador3\obj\Debug\Borrador3.pdb
+C:\Users\sebas\Downloads\New folder\Asistencias\Borrador3\bin\Debug\Borrador3.exe.config
+C:\Users\sebas\Downloads\New folder\Asistencias\Borrador3\bin\Debug\Borrador3.exe
+C:\Users\sebas\Downloads\New folder\Asistencias\Borrador3\bin\Debug\Borrador3.pdb
+C:\Users\sebas\Downloads\New folder\Asistencias\Borrador3\obj\Debug\Borrador3.csproj.AssemblyReference.cache
+C:\Users\sebas\Downloads\New folder\Asistencias\Borrador3\obj\Debug\Borrador3.exe.config
+C:\Users\sebas\Downloads\New folder\Asistencias\Borrador3\obj\Debug\Borrador3.Alumnos.resources
+C:\Users\sebas\Downloads\New folder\Asistencias\Borrador3\obj\Debug\Borrador3.Asistencias.resources
+C:\Users\sebas\Downloads\New folder\Asistencias\Borrador3\obj\Debug\Borrador3.Properties.Resources.resources
+C:\Users\sebas\Downloads\New folder\Asistencias\Borrador3\obj\Debug\Borrador3.csproj.GenerateResource.cache
+C:\Users\sebas\Downloads\New folder\Asistencias\Borrador3\obj\Debug\Borrador3.csproj.CoreCompileInputs.cache
+C:\Users\sebas\Downloads\New folder\Asistencias\Borrador3\obj\Debug\Borrador3.exe
+C:\Users\sebas\Downloads\New folder\Asistencias\Borrador3\obj\Debug\Borrador3.pdb
+C:\Users\sebas\Downloads\New folder\Asistencias\Borrador3\bin\Debug\EPPlus.dll
+C:\Users\sebas\Downloads\New folder\Asistencias\Borrador3\bin\Debug\EPPlus.xml
+C:\Users\sebas\Downloads\New folder\Asistencias\Borrador3\obj\Debug\Borrador3.csproj.Up2Date

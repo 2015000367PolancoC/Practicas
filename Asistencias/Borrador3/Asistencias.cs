@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OfficeOpenXml;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -49,6 +50,7 @@ namespace Borrador3
         }
         public void fein()
         {
+            // :(
             dataGridView1.Columns.Remove("estado");
         }
         private void limpiarfiltros()
@@ -69,6 +71,32 @@ namespace Borrador3
             dataGridView1.Columns.Remove("estado");
             registros();
             comboBox1.SelectedIndex = 0;
+        }
+        private void ExportSqlTableToExcel(string filePath)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("SELECT a.nombres_alumno AS 'Nombre',a.apellidos_alumno AS 'Apellido', a.grado AS 'Grado', s.fecha AS 'Fecha',s.estado AS 'Presente' from info_alumnos a INNER JOIN asistencias s ON a.id_alumno = s.id_alumno", conexion);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            using (var package = new ExcelPackage())
+            {
+                var worksheet = package.Workbook.Worksheets.Add("Sheet1");
+
+                for (int i = 0; i < dt.Columns.Count; i++)
+                {
+                    worksheet.Cells[1, i + 1].Value = dt.Columns[i].ColumnName;
+                }
+
+                for (int x = 0; x < dt.Rows.Count; x++)
+                {
+                    for (int y = 0; y < dt.Columns.Count; y++)
+                    {
+                        worksheet.Cells[x + 2, y + 1].Value = dt.Rows[x][y];
+                    }
+                }
+
+                package.SaveAs(new System.IO.FileInfo(filePath));
+            }
         }
         private void administrarAlumnosToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -186,35 +214,27 @@ namespace Borrador3
                     bool presente = Convert.ToBoolean(row.Cells["estado"].Value);
 
                     int idAlumno = -1;
-                    using (SqlCommand cmd = new SqlCommand("SELECT id_alumno FROM info_alumnos WHERE nombres_alumno=@nombre AND apellidos_alumno=@apellido AND grado=@grado", conexion))
-                    {
-                        cmd.Parameters.AddWithValue("@nombre", nombre);
-                        cmd.Parameters.AddWithValue("@apellido", apellido);
-                        cmd.Parameters.AddWithValue("@grado", grado);
-
-                        object result = cmd.ExecuteScalar();
-                        if (result != null)
-                            idAlumno = Convert.ToInt32(result);
-                    }
-
+                    SqlCommand asignar = new SqlCommand("SELECT id_alumno FROM info_alumnos WHERE nombres_alumno=@nombre AND apellidos_alumno=@apellido AND grado=@grado", conexion);
+                    asignar.Parameters.AddWithValue("@nombre", nombre);
+                    asignar.Parameters.AddWithValue("@apellido", apellido);
+                    asignar.Parameters.AddWithValue("@grado", grado);
+                    object result = asignar.ExecuteScalar();
+                    if (result != null)
+                        idAlumno = Convert.ToInt32(result);
                     if (idAlumno != -1)
                     {
-                        using (SqlCommand checkCmd = new SqlCommand("SELECT COUNT(*) FROM asistencias WHERE id_alumno=@id AND fecha=@fecha", conexion))
+                        SqlCommand seleccionar = new SqlCommand("SELECT COUNT(*) FROM asistencias WHERE id_alumno=@id AND fecha=@fecha", conexion);
+                        seleccionar.Parameters.AddWithValue("@id", idAlumno);
+                        seleccionar.Parameters.AddWithValue("@fecha", dateTimePicker2.Value.Date);
+                        int count = (int)seleccionar.ExecuteScalar();
+                        if (count == 0)
                         {
-                            checkCmd.Parameters.AddWithValue("@id", idAlumno);
-                            checkCmd.Parameters.AddWithValue("@fecha", dateTimePicker2.Value.Date);
-
-                            int count = (int)checkCmd.ExecuteScalar();
-                            if (count == 0)
-                            {
-                                using (SqlCommand insertCmd = new SqlCommand("INSERT INTO asistencias (id_alumno, fecha, estado) VALUES (@id, @fecha, @estado)", conexion))
-                                {
-                                    insertCmd.Parameters.AddWithValue("@id", idAlumno);
-                                    insertCmd.Parameters.AddWithValue("@fecha", dateTimePicker2.Value.Date);
-                                    insertCmd.Parameters.AddWithValue("@estado", presente);
-                                    insertCmd.ExecuteNonQuery();
-                                }
-                            }
+                            SqlCommand insertar = new SqlCommand("INSERT INTO asistencias (id_alumno, fecha, estado) VALUES (@id, @fecha, @estado)", conexion);
+                            insertar.Parameters.AddWithValue("@id", idAlumno);
+                            insertar.Parameters.AddWithValue("@fecha", dateTimePicker2.Value.Date);
+                            insertar.Parameters.AddWithValue("@estado", presente);
+                            insertar.ExecuteNonQuery();
+                            
                         }
                     }
                 }
@@ -232,7 +252,15 @@ namespace Borrador3
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "Excel files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            saveFileDialog1.FileName = "Estadisticas.xlsx";
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = saveFileDialog1.FileName;
+                ExportSqlTableToExcel(filePath);
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -251,35 +279,31 @@ namespace Borrador3
                         bool presente = Convert.ToBoolean(row.Cells["estado"].Value);
 
                         int idAlumno = -1;
-                        using (SqlCommand cmd = new SqlCommand("SELECT id_alumno FROM info_alumnos WHERE nombres_alumno=@nombre AND apellidos_alumno=@apellido AND grado=@grado", conexion))
-                        {
-                            cmd.Parameters.AddWithValue("@nombre", nombre);
-                            cmd.Parameters.AddWithValue("@apellido", apellido);
-                            cmd.Parameters.AddWithValue("@grado", grado);
+                        SqlCommand cmd = new SqlCommand("SELECT id_alumno FROM info_alumnos WHERE nombres_alumno=@nombre AND apellidos_alumno=@apellido AND grado=@grado", conexion);
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+                        cmd.Parameters.AddWithValue("@apellido", apellido);
+                        cmd.Parameters.AddWithValue("@grado", grado);
 
-                            object result = cmd.ExecuteScalar();
-                            if (result != null)
-                                idAlumno = Convert.ToInt32(result);
-                        }
+                        object result = cmd.ExecuteScalar();
+                        if (result != null) 
+                            idAlumno = Convert.ToInt32(result);
+                        
 
                         if (idAlumno != -1)
                         {
-                            using (SqlCommand checkCmd = new SqlCommand("SELECT COUNT(*) FROM asistencias WHERE id_alumno=@id AND fecha=@fecha", conexion))
-                            {
-                                checkCmd.Parameters.AddWithValue("@id", idAlumno);
-                                checkCmd.Parameters.AddWithValue("@fecha", dateTimePicker2.Value.Date);
+                            SqlCommand checkCmd = new SqlCommand("SELECT COUNT(*) FROM asistencias WHERE id_alumno=@id AND fecha=@fecha", conexion);
+                            checkCmd.Parameters.AddWithValue("@id", idAlumno);
+                            checkCmd.Parameters.AddWithValue("@fecha", dateTimePicker2.Value.Date);
 
-                                int count = (int)checkCmd.ExecuteScalar();
-                                if (count != 0)
-                                {
-                                    using (SqlCommand updateCmd = new SqlCommand("UPDATE asistencias SET estado=@estado WHERE id_alumno=@id AND fecha=@fecha", conexion))
-                                    {
-                                        updateCmd.Parameters.AddWithValue("@id", idAlumno);
-                                        updateCmd.Parameters.AddWithValue("@fecha", dateTimePicker2.Value.Date);
-                                        updateCmd.Parameters.AddWithValue("@estado", presente);
-                                        updateCmd.ExecuteNonQuery();
-                                    }
-                                }
+                            int count = (int)checkCmd.ExecuteScalar();
+                            if (count != 0)
+                            {
+                                SqlCommand updateCmd = new SqlCommand("UPDATE asistencias SET estado=@estado WHERE id_alumno=@id AND fecha=@fecha", conexion);
+                                updateCmd.Parameters.AddWithValue("@id", idAlumno);
+                                updateCmd.Parameters.AddWithValue("@fecha", dateTimePicker2.Value.Date);
+                                updateCmd.Parameters.AddWithValue("@estado", presente);
+                                updateCmd.ExecuteNonQuery();
+                                    
                             }
                         }
                     }
@@ -294,9 +318,7 @@ namespace Borrador3
                     conexion.Close();
                 }
             }
-
         }
-
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox1.Checked)
