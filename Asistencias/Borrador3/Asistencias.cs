@@ -170,7 +170,7 @@ namespace Borrador3
                 {
                     if (!checkBox1.Checked)
                     {
-                        filtrar(consultafiltro + "where fecha ='" + dateTimePicker1.Value + "'");
+                        filtrar(consultafiltro + "where fecha ='" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "'");
                         dataGridView1.ReadOnly = true;
                         btnVerReg.Enabled = false;
                         btnLimpiarReg.Enabled = true;
@@ -191,7 +191,7 @@ namespace Borrador3
                 {
                     if (!checkBox1.Checked)
                     {
-                        filtrar(consultafiltro + " where grado ='" + comboBox1.SelectedItem.ToString() + "'AND fecha ='" + dateTimePicker1.Value + "'");
+                        filtrar(consultafiltro + " where grado ='" + comboBox1.SelectedItem.ToString() + "' AND fecha ='" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "'");
                         dataGridView1.ReadOnly = true;
                         btnVerReg.Enabled = false;
                         btnLimpiarReg.Enabled = true;
@@ -376,9 +376,10 @@ namespace Borrador3
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            eliminarcolumna();
             limpiarregistros();
             registros();
+            eliminarcolumna();
+            agregarcolumna();
         }
 
         private void radioButton3_CheckedChanged(object sender, EventArgs e)
@@ -391,7 +392,7 @@ namespace Borrador3
         {
             try
             {
-                filtrar("select nombres_alumno as 'Nombre',apellidos_alumno as 'Apellido',grado as 'Grado' from info_alumnos where nombres_alumno = '" + textBox1.Text + "' and apellidos_alumno = '" + textBox2.Text + "'; ");
+                filtrar("select nombres_alumno as 'Nombre',apellidos_alumno as 'Apellido',grado as 'Grado' from info_alumnos where nombres_alumno = '" + textBox1.Text + "' and apellidos_alumno = '" + textBox2.Text + "'");
                 agregarcolumna();
             }
             catch (Exception ex)
