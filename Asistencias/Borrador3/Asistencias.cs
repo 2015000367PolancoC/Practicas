@@ -1,4 +1,5 @@
 ﻿using OfficeOpenXml;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
 using System;
 using System.Data;
 using System.Data.SqlClient;
@@ -8,8 +9,10 @@ namespace Borrador3
 {
     public partial class Asistencias : Form
     {
+        //Cambiar a la ip de Beatriz (o configurar el server de la miss a esta ip y puerto)
         String consultafiltro = "SELECT a.nombres_alumno AS 'Nombre',a.apellidos_alumno AS 'Apellido', a.grado AS 'Grado', s.fecha AS 'Fecha',s.estado AS 'Presente' from info_alumnos a INNER JOIN asistencias s ON a.id_alumno = s.id_alumno ";
-        SqlConnection conexion = new SqlConnection("Data Source=localhost\\SQLEXPRESS;Initial Catalog=asistencias_control;Integrated Security=True");
+        int count;
+        SqlConnection conexion = new SqlConnection("Data Source=192.168.0.37,49172;Initial Catalog=asistencias_control;User ID = dario2;Password = admin");
         public Asistencias()
         {
             InitializeComponent();
@@ -26,9 +29,9 @@ namespace Borrador3
                         "SELECT nombres_alumno AS 'Nombre',apellidos_alumno AS 'Apellido',grado AS 'Grado' from info_alumnos\r\n" +
                         "ORDER BY \r\n" +
                         "    CASE \r\n" +
-                        "        WHEN grado = 'Primero Basico' THEN 1\r\n" +
-                        "        WHEN grado = 'Segundo Basico' THEN 2\r\n" +
-                        "        WHEN grado = 'Tercero Basico' THEN 3\r\n" +
+                        "        WHEN grado = 'Primero Básico' THEN 1\r\n" +
+                        "        WHEN grado = 'Segundo Básico' THEN 2\r\n" +
+                        "        WHEN grado = 'Tercero Básico' THEN 3\r\n" +
                         "        WHEN grado = 'Cuarto Bachillerato' THEN 4\r\n" +
                         "        WHEN grado = 'Quinto Bachillerato' THEN 5\r\n" +
                         "        ELSE 1000\r\n" +
@@ -90,19 +93,17 @@ namespace Borrador3
         private void ExportSqlTableToExcel(string filePath)
         { //Creditos a so
             SqlDataAdapter da = new SqlDataAdapter(consultafiltro +
-                        "ORDER BY \r\n" +
+                        "ORDER BY fecha asc,\r\n" +
                         "    CASE \r\n" +
-                        "        WHEN grado = 'Primero Basico' THEN 1\r\n" +
-                        "        WHEN grado = 'Segundo Basico' THEN 2\r\n" +
-                        "        WHEN grado = 'Tercero Basico' THEN 3\r\n" +
+                        "        WHEN grado = 'Primero Básico' THEN 1\r\n" +
+                        "        WHEN grado = 'Segundo Básico' THEN 2\r\n" +
+                        "        WHEN grado = 'Tercero Básico' THEN 3\r\n" +
                         "        WHEN grado = 'Cuarto Bachillerato' THEN 4\r\n" +
                         "        WHEN grado = 'Quinto Bachillerato' THEN 5\r\n" +
                         "        ELSE 1000\r\n" +
                         "    END asc, apellidos_alumno asc;", conexion);
             DataTable dt = new DataTable();
             da.Fill(dt);
-
-            // Abre el archivo existente
             using (var package = new ExcelPackage(new System.IO.FileInfo(filePath)))
             {
                 var worksheet = package.Workbook.Worksheets.FirstOrDefault();
@@ -111,8 +112,6 @@ namespace Borrador3
                 {
                     worksheet.Cells[1, i + 1].Value = dt.Columns[i].ColumnName;
                 }
-
-                // Escribe filas
                 for (int x = 0; x < dt.Rows.Count; x++)
                 {
                     for (int y = 0; y < dt.Columns.Count; y++)
@@ -123,15 +122,14 @@ namespace Borrador3
                 try
                 {
                     package.Save();
+                    MessageBox.Show("Archivo guardado exitosamente");
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error al guardar el archivo: " + ex.Message);
                 }
             }
-
         }
-
         private void administrarAlumnosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             limpiarfiltros();
@@ -148,7 +146,7 @@ namespace Borrador3
             {
                 eliminarcolumna();
                 conexion.Open();
-                SqlDataAdapter comando = new SqlDataAdapter(query + "ORDER BY \r\n    CASE \r\n        WHEN grado = 'Primero Basico' THEN 1\r\n        WHEN grado = 'Segundo Basico' THEN 2\r\n        WHEN grado = 'Tercero Basico' THEN 3\r\n        WHEN grado = 'Cuarto Bachillerato' THEN 4\r\n        WHEN grado = 'Quinto Bachillerato' THEN 5\r\n        ELSE 1000\r\n    END asc, apellidos_alumno asc", conexion);
+                SqlDataAdapter comando = new SqlDataAdapter(query +"CASE         WHEN grado = 'Primero Básico' THEN 1        WHEN grado = 'Segundo Básico' THEN 2        WHEN grado = 'Tercero Básico' THEN 3        WHEN grado = 'Cuarto Bachillerato' THEN 4        WHEN grado = 'Quinto Bachillerato' THEN 5        ELSE 1000    END asc, apellidos_alumno asc", conexion);
                 DataSet dt = new DataSet();
                 comando.Fill(dt, "nombre");
                 dataGridView1.DataSource = dt.Tables["nombre"].DefaultView;
@@ -170,53 +168,78 @@ namespace Borrador3
                 {
                     if (!checkBox1.Checked)
                     {
-                        filtrar(consultafiltro + "where fecha ='" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "'");
+                        filtrar(consultafiltro + "where fecha ='" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "' ORDER BY fecha asc,");
                         dataGridView1.ReadOnly = true;
                         btnVerReg.Enabled = false;
                         btnLimpiarReg.Enabled = true;
                         //Workaround por que crashea si se abre mientras haya un filtro activo
                         btnAlumnos.Enabled = false;
+                        radioButton3.Enabled = false;
+                        radioButton4.Enabled = false;
+                        btnLimpiarFiltro.Enabled = false;
+                        btnActualizar.Enabled = false;
+                        btnGuardar.Enabled = false;
                     }
                     else
                     {
-                        filtrar(consultafiltro);
+                        filtrar(consultafiltro + "ORDER BY fecha asc,");
                         dataGridView1.ReadOnly = true;
                         btnVerReg.Enabled = false;
                         btnLimpiarReg.Enabled = true;
                         //Workaround por que crashea si se abre mientras haya un filtro activo
                         btnAlumnos.Enabled = false;
+                        radioButton3.Enabled = false;
+                        radioButton4.Enabled = false;
+                        btnLimpiarFiltro.Enabled = false;
+                        btnActualizar.Enabled = false;
+                        btnGuardar.Enabled = false;
                     }
                 }
                 else
                 {
                     if (!checkBox1.Checked)
                     {
-                        filtrar(consultafiltro + " where grado ='" + comboBox1.SelectedItem.ToString() + "' AND fecha ='" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "'");
+                        filtrar(consultafiltro + " where grado ='" + comboBox1.SelectedItem.ToString() + "' AND fecha ='" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "'  ORDER BY fecha asc,");
                         dataGridView1.ReadOnly = true;
                         btnVerReg.Enabled = false;
                         btnLimpiarReg.Enabled = true;
                         //Workaround por que crashea si se abre mientras haya un filtro activo
                         btnAlumnos.Enabled = false;
+                        radioButton3.Enabled = false;
+                        radioButton4.Enabled = false;
+                        btnLimpiarFiltro.Enabled = false;
+                        btnActualizar.Enabled = false;
+                        btnGuardar.Enabled = false;
                     }
                     else
                     {
-                        filtrar(consultafiltro + "where grado ='" + comboBox1.SelectedItem.ToString() + "'");
+                        filtrar(consultafiltro + "where grado ='" + comboBox1.SelectedItem.ToString() + "'  ORDER BY fecha asc,");
                         dataGridView1.ReadOnly = true;
                         btnVerReg.Enabled = false;
                         btnLimpiarReg.Enabled = true;
                         //Workaround por que crashea si se abre mientras haya un filtro activo
                         btnAlumnos.Enabled = false;
+                        radioButton3.Enabled = false;
+                        radioButton4.Enabled = false;
+                        btnLimpiarFiltro.Enabled = false;
+                        btnActualizar.Enabled = false;
+                        btnGuardar.Enabled = false;
                     }
                 }
             }
             else if (radioButton1.Checked && textBox1.Text != "" && textBox2.Text != "")
             {
-                filtrar(consultafiltro + "where nombres_alumno='" + textBox1.Text + "' and apellidos_alumno='" + textBox2.Text + "'");
+                filtrar(consultafiltro + "where nombres_alumno='" + textBox1.Text + "' and apellidos_alumno='" + textBox2.Text + "'  ORDER BY fecha asc,");
                 dataGridView1.ReadOnly = true;
                 btnVerReg.Enabled = false;
                 btnLimpiarReg.Enabled = true;
                 //Workaround por que crashea si se abre mientras haya un filtro activo
                 btnAlumnos.Enabled = false;
+                radioButton3.Enabled = false;
+                radioButton4.Enabled = false;
+                btnLimpiarFiltro.Enabled = false;
+                btnActualizar.Enabled = false;
+                btnGuardar.Enabled = false;
             }
             else
             {
@@ -227,15 +250,18 @@ namespace Borrador3
                 agregarcolumna();
             }
         }
-
         private void button4_Click(object sender, EventArgs e)
         {
             limpiarfiltros();
             registros();
             agregarcolumna();
             btnAlumnos.Enabled = true;
+            radioButton3.Enabled = true;
+            radioButton4.Enabled = true;
+            btnLimpiarFiltro.Enabled = true;
+            btnActualizar.Enabled = true;
+            btnGuardar.Enabled = true;
         }
-
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             textBox1.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
@@ -244,7 +270,6 @@ namespace Borrador3
             textBox3.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
             textBox4.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
             try
@@ -270,7 +295,7 @@ namespace Borrador3
                         SqlCommand seleccionar = new SqlCommand("SELECT COUNT(*) FROM asistencias WHERE id_alumno=@id AND fecha=@fecha", conexion);
                         seleccionar.Parameters.AddWithValue("@id", idAlumno);
                         seleccionar.Parameters.AddWithValue("@fecha", dateTimePicker2.Value.Date);
-                        int count = (int)seleccionar.ExecuteScalar();
+                        count = (int)seleccionar.ExecuteScalar();
                         if (count == 0)
                         {
                             SqlCommand insertar = new SqlCommand("INSERT INTO asistencias (id_alumno, fecha, estado) VALUES (@id, @fecha, @estado)", conexion);
@@ -278,11 +303,17 @@ namespace Borrador3
                             insertar.Parameters.AddWithValue("@fecha", dateTimePicker2.Value.Date);
                             insertar.Parameters.AddWithValue("@estado", presente);
                             insertar.ExecuteNonQuery();
-
                         }
                     }
                 }
-                MessageBox.Show("Asistencias registradas correctamente.");
+                if (count == 0)
+                {
+                    MessageBox.Show("Asistencias registradas correctamente.");
+                }
+                else
+                {
+                    MessageBox.Show("Ya hay registros este dia");
+                }
             }
             catch (Exception ex)
             {
@@ -324,7 +355,6 @@ namespace Borrador3
                             SqlCommand checkCmd = new SqlCommand("SELECT COUNT(*) FROM asistencias WHERE id_alumno=@id AND fecha=@fecha", conexion);
                             checkCmd.Parameters.AddWithValue("@id", idAlumno);
                             checkCmd.Parameters.AddWithValue("@fecha", dateTimePicker2.Value.Date);
-
                             int count = (int)checkCmd.ExecuteScalar();
                             if (count != 0)
                             {
@@ -333,7 +363,6 @@ namespace Borrador3
                                 updateCmd.Parameters.AddWithValue("@fecha", dateTimePicker2.Value.Date);
                                 updateCmd.Parameters.AddWithValue("@estado", presente);
                                 updateCmd.ExecuteNonQuery();
-
                             }
                         }
                     }
@@ -364,36 +393,39 @@ namespace Borrador3
         private void generarEstadisticasToolStripMenuItem_Click(object sender, EventArgs e)
         { //Creditos especiales al departamento de computacion del don bosco por NO enseñarme a llamar el Guardar como.
             SaveFileDialog s = new SaveFileDialog();
-            s.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
+            s.Filter = "Excel files (*.xlsx)|*.*";
             s.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            s.FileName = "Estadisticas.xlsx";
+            s.FileName = "Estadisticas.xlsm";
             if (s.ShowDialog() == DialogResult.OK)
             {
                 string filePath = s.FileName;
                 ExportSqlTableToExcel(filePath);
             }
         }
-
         private void button2_Click_1(object sender, EventArgs e)
         {
             limpiarregistros();
             registros();
             eliminarcolumna();
             agregarcolumna();
+            btnVerReg.Enabled = true;
+            btnLimpiarFiltro.Enabled = false;
         }
-
         private void radioButton3_CheckedChanged(object sender, EventArgs e)
         {
-            filtrar("select nombres_alumno AS 'Nombre',apellidos_alumno AS 'Apellido',grado AS 'Grado' from info_alumnos where grado = '" + comboBox2.SelectedItem.ToString() + "'");
+            filtrar("select nombres_alumno AS 'Nombre',apellidos_alumno AS 'Apellido',grado AS 'Grado' from info_alumnos where grado = '" + comboBox2.SelectedItem.ToString() + "' ORDER BY ");
             agregarcolumna();
+            btnVerReg.Enabled = false;
+            btnLimpiarFiltro.Enabled = true;
         }
-
         private void radioButton4_CheckedChanged(object sender, EventArgs e)
         {
             try
             {
-                filtrar("select nombres_alumno as 'Nombre',apellidos_alumno as 'Apellido',grado as 'Grado' from info_alumnos where nombres_alumno = '" + textBox1.Text + "' and apellidos_alumno = '" + textBox2.Text + "'");
+                filtrar("select nombres_alumno as 'Nombre',apellidos_alumno as 'Apellido',grado as 'Grado' from info_alumnos where nombres_alumno = '" + textBox1.Text + "' and apellidos_alumno = '" + textBox2.Text + "' ORDER BY ");
                 agregarcolumna();
+                btnVerReg.Enabled = false;
+                btnLimpiarFiltro.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -401,9 +433,22 @@ namespace Borrador3
             }
         }
 
-        private void groupBox3_Enter(object sender, EventArgs e)
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (checkBox2.Checked)
+            {
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    row.Cells["estado"].Value = true;
+                }
+            }
+            else
+            {
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    row.Cells["estado"].Value = false;
+                }
+            }
         }
     }
 }

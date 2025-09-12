@@ -61,6 +61,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.label7 = new System.Windows.Forms.Label();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -230,9 +231,9 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "Todos",
-            "Primero Basico",
-            "Segundo Basico",
-            "Tercero Basico",
+            "Primero Básico",
+            "Segundo Básico",
+            "Tercero Básico",
             "Cuarto Bachillerato",
             "Quinto Bachillerato"});
             this.comboBox1.Location = new System.Drawing.Point(48, 18);
@@ -267,11 +268,12 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.checkBox2);
             this.groupBox2.Controls.Add(this.btnActualizar);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.btnGuardar);
             this.groupBox2.Controls.Add(this.dateTimePicker2);
-            this.groupBox2.Location = new System.Drawing.Point(12, 27);
+            this.groupBox2.Location = new System.Drawing.Point(205, 28);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(179, 124);
             this.groupBox2.TabIndex = 3;
@@ -326,20 +328,21 @@
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.radioButton3);
             this.groupBox3.Controls.Add(this.label7);
-            this.groupBox3.Location = new System.Drawing.Point(197, 27);
+            this.groupBox3.Location = new System.Drawing.Point(12, 28);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(187, 124);
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Filtrar";
-            this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
             // 
             // btnLimpiarFiltro
             // 
-            this.btnLimpiarFiltro.Location = new System.Drawing.Point(138, 94);
+            this.btnLimpiarFiltro.Enabled = false;
+            this.btnLimpiarFiltro.Location = new System.Drawing.Point(100, 94);
             this.btnLimpiarFiltro.Name = "btnLimpiarFiltro";
-            this.btnLimpiarFiltro.Size = new System.Drawing.Size(41, 23);
+            this.btnLimpiarFiltro.Size = new System.Drawing.Size(79, 23);
             this.btnLimpiarFiltro.TabIndex = 14;
+            this.btnLimpiarFiltro.Text = "Reestablecer";
             this.btnLimpiarFiltro.UseVisualStyleBackColor = true;
             this.btnLimpiarFiltro.Click += new System.EventHandler(this.button2_Click_1);
             // 
@@ -364,9 +367,9 @@
             this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Items.AddRange(new object[] {
-            "Primero Basico",
-            "Segundo Basico",
-            "Tercero Basico",
+            "Primero Básico",
+            "Segundo Básico",
+            "Tercero Básico",
             "Cuarto Bachillerato",
             "Quinto Bachillerato"});
             this.comboBox2.Location = new System.Drawing.Point(58, 67);
@@ -384,7 +387,7 @@
             // radioButton4
             // 
             this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(70, 94);
+            this.radioButton4.Location = new System.Drawing.Point(6, 102);
             this.radioButton4.Name = "radioButton4";
             this.radioButton4.Size = new System.Drawing.Size(62, 17);
             this.radioButton4.TabIndex = 10;
@@ -405,7 +408,7 @@
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(10, 94);
+            this.radioButton3.Location = new System.Drawing.Point(6, 87);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(54, 17);
             this.radioButton3.TabIndex = 4;
@@ -422,6 +425,17 @@
             this.label7.Size = new System.Drawing.Size(44, 13);
             this.label7.TabIndex = 12;
             this.label7.Text = "Nombre";
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(10, 80);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(92, 17);
+            this.checkBox2.TabIndex = 11;
+            this.checkBox2.Text = "Marcar Todos";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
             // Asistencias
             // 
@@ -486,6 +500,7 @@
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnLimpiarFiltro;
+        private System.Windows.Forms.CheckBox checkBox2;
     }
 }
 

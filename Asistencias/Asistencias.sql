@@ -25,89 +25,89 @@ select id_alumno as 'Codigo',nombres_alumno as 'Nombre',apellidos_alumno as 'Ape
 insert into info_alumnos(nombres_alumno,apellidos_alumno,grado)
 values
 
-/*PRIMERO BASICO*/
+/*PRIMERO Básico*/
 
-('Astrid Dayana', 'Álvarez de la Cruz', 'Primero Basico'),
-('Ana Camila Suceth', 'Amaya Pérez', 'Primero Basico'),
-('Ángel Manuel', 'Armis', 'Primero Basico'),
-('Marco Antonio', 'Batres Echeverria', 'Primero Basico'),
-('Jhorgeysil Ayleen', 'Bonilla', 'Primero Basico'),
-('Angie Delyanne', 'Flores Soyoy', 'Primero Basico'),
-('Abi Michelle', 'Gómez Rodríguez', 'Primero Basico'),
-('Prisly Adairiz', 'González Ordoñez', 'Primero Basico'),
-('Hamilthon Esaú', 'González Sí', 'Primero Basico'),
-('Sharon Alejandra', 'Jiménez Soyoy', 'Primero Basico'),
-('Lisandro Saúl', 'Juárez Escalante', 'Primero Basico'),
-('Rosa María', 'Macario Vicente', 'Primero Basico'),
-('Tomás Santiago', 'Mateo Sapón', 'Primero Basico'),
-('Austin Daniel', 'Montes Arreola', 'Primero Basico'),
-('Jeffrey Mateo', 'Natareno Toc', 'Primero Basico'),
-('Mario Martin', 'Patzán Hernández', 'Primero Basico'),
-('Diego Andreé', 'Rodas Zurdo', 'Primero Basico'),
-('Katherine Mariana', 'Romero Méndez', 'Primero Basico'),
-('Edwin David', 'Roquel Caniche', 'Primero Basico'),
-('Norman Isaac', 'Soc Grande', 'Primero Basico'),
-('Jennyfer Ximena', 'Váldez Urbina', 'Primero Basico'),
-('Martina Fátima Saraí', 'Rivas Velásquez', 'Primero Basico'),
-('Alberth de Jesús', 'Contreras Corea', 'Primero Basico'),
-('Antoni Vinicio', 'Ismalé Pérez', 'Primero Basico'),
-('Candy Fabiola Odeth', 'Simón Peren', 'Primero Basico'),
-('Jhoshua Gamaliel', 'Molina Case', 'Primero Basico'),
-('Kiara Julissa Leilany', 'Benito Pérez ', 'Primero Basico'),
+('Astrid Dayana', 'Álvarez de la Cruz', 'Primero Básico'),
+('Ana Camila Suceth', 'Amaya Pérez', 'Primero Básico'),
+('Ángel Manuel', 'Armis', 'Primero Básico'),
+('Marco Antonio', 'Batres Echeverria', 'Primero Básico'),
+('Jhorgeysil Ayleen', 'Bonilla', 'Primero Básico'),
+('Angie Delyanne', 'Flores Soyoy', 'Primero Básico'),
+('Abi Michelle', 'Gómez Rodríguez', 'Primero Básico'),
+('Prisly Adairiz', 'González Ordoñez', 'Primero Básico'),
+('Hamilthon Esaú', 'González Sí', 'Primero Básico'),
+('Sharon Alejandra', 'Jiménez Soyoy', 'Primero Básico'),
+('Lisandro Saúl', 'Juárez Escalante', 'Primero Básico'),
+('Rosa María', 'Macario Vicente', 'Primero Básico'),
+('Tomás Santiago', 'Mateo Sapón', 'Primero Básico'),
+('Austin Daniel', 'Montes Arreola', 'Primero Básico'),
+('Jeffrey Mateo', 'Natareno Toc', 'Primero Básico'),
+('Mario Martin', 'Patzán Hernández', 'Primero Básico'),
+('Diego Andreé', 'Rodas Zurdo', 'Primero Básico'),
+('Katherine Mariana', 'Romero Méndez', 'Primero Básico'),
+('Edwin David', 'Roquel Caniche', 'Primero Básico'),
+('Norman Isaac', 'Soc Grande', 'Primero Básico'),
+('Jennyfer Ximena', 'Váldez Urbina', 'Primero Básico'),
+('Martina Fátima Saraí', 'Rivas Velásquez', 'Primero Básico'),
+('Alberth de Jesús', 'Contreras Corea', 'Primero Básico'),
+('Antoni Vinicio', 'Ismalé Pérez', 'Primero Básico'),
+('Candy Fabiola Odeth', 'Simón Peren', 'Primero Básico'),
+('Jhoshua Gamaliel', 'Molina Case', 'Primero Básico'),
+('Kiara Julissa Leilany', 'Benito Pérez ', 'Primero Básico'),
 
-/*SEGUNDO BASICO*/
+/*SEGUNDO Básico*/
 
-('Mia Scarlet Susana', 'Carrera Lobos', 'Segundo Basico'),
-('Candy Mishelle', 'Chocoj Rodríguez', 'Segundo Basico'),
-('Daniela Jimena', 'Fernández Raymundo', 'Segundo Basico'),
-('Adam Carlos Enrique', 'Hernández Mendoza', 'Segundo Basico'),
-('Karely Nicole', 'Hernández Vargas', 'Segundo Basico'),
-('Alexandra Anahí Yanet', 'Higueros Burrión', 'Segundo Basico'),
-('Scarlett Dajane', 'Marroquín Orantes', 'Segundo Basico'),
-('Melany Anahí', 'Martin Ajiatáz', 'Segundo Basico'),
-('Kristen Nicol', 'Meletz Carrera', 'Segundo Basico'),
-('Jeremy Alexis', 'Méndez Ijchajchal', 'Segundo Basico'),
-('Ilbia Rosalia', 'Morales Agustín', 'Segundo Basico'),
-('Pedro Josué', 'Ordoñez Zurdo', 'Segundo Basico'),
-('Julio Alejandro Jeremiah', 'Ordoñez Zurdo', 'Segundo Basico'),
-('Sherlin Esmeralda', 'Patzan Díaz', 'Segundo Basico'),
-('Damaris Anay', 'Rafael Baíl', 'Segundo Basico'),
-('Jeferson Omar Israel', 'Rangel Foronda', 'Segundo Basico'),
-('Mildre Aracely', 'Salalá Soyos', 'Segundo Basico'),
-('Jocelyn Mchelle', 'Salala Soyos', 'Segundo Basico'),
-('Iñaki Lorenzo Antonio', 'Solis Salguero', 'Segundo Basico'),
-('Kristofer Augusto', 'Toledo Chiquitó', 'Segundo Basico'),
-('Londy María', 'Tzul Quiñónez', 'Segundo Basico'),
-('Erick Andrés', 'Yoque Domingo', 'Segundo Basico'),
-('Sharóm Solansh Gabriela', 'Contreras Corea', 'Segundo Basico'),
-('Ghylaine Cristina', 'Ozuna Barillas', 'Segundo Basico'),
-('Estefany Paola', 'Morataya Patzán', 'Segundo Basico'),
-('William Jesús', 'Fernández Reyes', 'Segundo Basico'),
-('Ligia Virginia', 'Gutiérrez Salazar', 'Segundo Basico'),
+('Mia Scarlet Susana', 'Carrera Lobos', 'Segundo Básico'),
+('Candy Mishelle', 'Chocoj Rodríguez', 'Segundo Básico'),
+('Daniela Jimena', 'Fernández Raymundo', 'Segundo Básico'),
+('Adam Carlos Enrique', 'Hernández Mendoza', 'Segundo Básico'),
+('Karely Nicole', 'Hernández Vargas', 'Segundo Básico'),
+('Alexandra Anahí Yanet', 'Higueros Burrión', 'Segundo Básico'),
+('Scarlett Dajane', 'Marroquín Orantes', 'Segundo Básico'),
+('Melany Anahí', 'Martin Ajiatáz', 'Segundo Básico'),
+('Kristen Nicol', 'Meletz Carrera', 'Segundo Básico'),
+('Jeremy Alexis', 'Méndez Ijchajchal', 'Segundo Básico'),
+('Ilbia Rosalia', 'Morales Agustín', 'Segundo Básico'),
+('Pedro Josué', 'Ordoñez Zurdo', 'Segundo Básico'),
+('Julio Alejandro Jeremiah', 'Ordoñez Zurdo', 'Segundo Básico'),
+('Sherlin Esmeralda', 'Patzan Díaz', 'Segundo Básico'),
+('Damaris Anay', 'Rafael Baíl', 'Segundo Básico'),
+('Jeferson Omar Israel', 'Rangel Foronda', 'Segundo Básico'),
+('Mildre Aracely', 'Salalá Soyos', 'Segundo Básico'),
+('Jocelyn Mchelle', 'Salala Soyos', 'Segundo Básico'),
+('Iñaki Lorenzo Antonio', 'Solis Salguero', 'Segundo Básico'),
+('Kristofer Augusto', 'Toledo Chiquitó', 'Segundo Básico'),
+('Londy María', 'Tzul Quiñónez', 'Segundo Básico'),
+('Erick Andrés', 'Yoque Domingo', 'Segundo Básico'),
+('Sharóm Solansh Gabriela', 'Contreras Corea', 'Segundo Básico'),
+('Ghylaine Cristina', 'Ozuna Barillas', 'Segundo Básico'),
+('Estefany Paola', 'Morataya Patzán', 'Segundo Básico'),
+('William Jesús', 'Fernández Reyes', 'Segundo Básico'),
+('Ligia Virginia', 'Gutiérrez Salazar', 'Segundo Básico'),
 
-/*TERCERO BASICO*/
+/*TERCERO Básico*/
 
-('Gloria Karina', 'Camey Osorio', 'Tercero Basico'),
-('Jessica Paola', 'Chaman', 'Tercero Basico'),
-('Naomi Susana', 'Cuc Gonzáles', 'Tercero Basico'),
-('Eddy Randolfo', 'Figueroa Martínez', 'Tercero Basico'),
-('Emily Julissa', 'Jocón Barillas', 'Tercero Basico'),
-('Wendy Johana', 'Mauricio López', 'Tercero Basico'),
-('Caterine Helizabeth', 'Méndez Jacobo', 'Tercero Basico'),
-('Angelin Daniela', 'Ochoa Quisquina', 'Tercero Basico'),
-('Axel Emanuel', 'Ortíz Yax', 'Tercero Basico'),
-('Cristian Rodolfo', 'Quisquina Locon', 'Tercero Basico'),
-('Axel Eduardo', 'Saban', 'Tercero Basico'),
-('María Elizabeth de la Soledad', 'Santizo de León', 'Tercero Basico'),
-('Wilson Alexander', 'Sicay Pérez', 'Tercero Basico'),
-('Mayda Nicol', 'Subuyuj Morales', 'Tercero Basico'),
-('Angelly Marleni Noemy', 'Tiul Coc', 'Tercero Basico'),
-('Jayra Baneza', 'Tiul Coc', 'Tercero Basico'),
-('Jefersón Estiven', 'Váldez Urbina', 'Tercero Basico'),
-('Ángel Ricardo', 'Méndez Chávez', 'Tercero Basico'),
-('Katheryn Amarylis', 'Villagrán Mijangos', 'Tercero Basico'),
-('Randy Alexander', 'Peren Otzoy', 'Tercero Basico'),
-('Maryury Daniela', 'Molina Case', 'Tercero Basico'),
+('Gloria Karina', 'Camey Osorio', 'Tercero Básico'),
+('Jessica Paola', 'Chaman', 'Tercero Básico'),
+('Naomi Susana', 'Cuc Gonzáles', 'Tercero Básico'),
+('Eddy Randolfo', 'Figueroa Martínez', 'Tercero Básico'),
+('Emily Julissa', 'Jocón Barillas', 'Tercero Básico'),
+('Wendy Johana', 'Mauricio López', 'Tercero Básico'),
+('Caterine Helizabeth', 'Méndez Jacobo', 'Tercero Básico'),
+('Angelin Daniela', 'Ochoa Quisquina', 'Tercero Básico'),
+('Axel Emanuel', 'Ortíz Yax', 'Tercero Básico'),
+('Cristian Rodolfo', 'Quisquina Locon', 'Tercero Básico'),
+('Axel Eduardo', 'Saban', 'Tercero Básico'),
+('María Elizabeth de la Soledad', 'Santizo de León', 'Tercero Básico'),
+('Wilson Alexander', 'Sicay Pérez', 'Tercero Básico'),
+('Mayda Nicol', 'Subuyuj Morales', 'Tercero Básico'),
+('Angelly Marleni Noemy', 'Tiul Coc', 'Tercero Básico'),
+('Jayra Baneza', 'Tiul Coc', 'Tercero Básico'),
+('Jefersón Estiven', 'Váldez Urbina', 'Tercero Básico'),
+('Ángel Ricardo', 'Méndez Chávez', 'Tercero Básico'),
+('Katheryn Amarylis', 'Villagrán Mijangos', 'Tercero Básico'),
+('Randy Alexander', 'Peren Otzoy', 'Tercero Básico'),
+('Maryury Daniela', 'Molina Case', 'Tercero Básico'),
 
 /*CUARTO BACHILLERATO*/
 ('Lesly Nohemí', 'Ajichiqui Diaz', 'Cuarto Bachillerato'),
@@ -133,17 +133,21 @@ values
 ('Sharon Dayan', 'Velásquez Cano', 'Quinto Bachillerato');
 
 
-select a.nombres_alumno as 'Nombre',a.apellidos_alumno as 'Apellido', a.grado as 'Grado', s.fecha as 'Fecha',s.estado as 'Presente' from info_alumnos a inner join asistencias s on a.id_alumno = s.id_alumno where grado='Primero basico';
+select a.nombres_alumno as 'Nombre',a.apellidos_alumno as 'Apellido', a.grado as 'Grado', s.fecha as 'Fecha',s.estado as 'Presente' from info_alumnos a inner join asistencias s on a.id_alumno = s.id_alumno where grado='Primero Básico';
 
-SELECT nombres_alumno AS 'Nombre',apellidos_alumno AS 'Apellido',grado AS 'Grado' from info_alumnos where grado = 'Segundo Basico'
+SELECT nombres_alumno AS 'Nombre',apellidos_alumno AS 'Apellido',grado AS 'Grado' from info_alumnos where grado = 'Segundo Básico'
 ORDER BY 
     CASE 
-        WHEN grado = 'Primero Basico' THEN 1
-        WHEN grado = 'Segundo Basico' THEN 2
-        WHEN grado = 'Tercero Basico' THEN 3
+        WHEN grado = 'Primero Básico' THEN 1
+        WHEN grado = 'Segundo Básico' THEN 2
+        WHEN grado = 'Tercero Básico' THEN 3
         WHEN grado = 'Cuarto Bachillerato' THEN 4
         WHEN grado = 'Quinto Bachillerato' THEN 5
         ELSE 1000
     END asc, apellidos_alumno asc;
 
-	select * from asistencias;
+
+	IF (SELECT grado FROM info_alumnos) = 'Primero Básico'
+		update info_alumnos SET grado = 'Segundo Básico' where grado = 'Primero Básico'
+
+SELECT COUNT(*) FROM info_alumnos WHERE grado = 'Primero Básico';

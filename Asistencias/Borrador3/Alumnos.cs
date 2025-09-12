@@ -13,7 +13,7 @@ namespace Borrador3
 {
     public partial class Alumnos : Form
     {
-        SqlConnection conexion = new SqlConnection("Data Source=localhost\\SQLEXPRESS;Initial Catalog=asistencias_control;Integrated Security=True");
+        SqlConnection conexion = new SqlConnection("Data Source=192.168.0.37,49172;Initial Catalog=asistencias_control;User ID = dario2;Password = admin");
         private Asistencias asistenciasForm;
 
         public Alumnos(Asistencias asistencias)
@@ -27,10 +27,22 @@ namespace Borrador3
             try
             {
                 conexion.Open();
-                SqlDataAdapter comando = new SqlDataAdapter("select id_alumno as 'Codigo',nombres_alumno AS 'Nombre',apellidos_alumno AS 'Apellido',grado AS 'Grado' from info_alumnos\r\nORDER BY \r\n    CASE \r\n        WHEN grado = 'Primero Basico' THEN 1\r\n        WHEN grado = 'Segundo Basico' THEN 2\r\n        WHEN grado = 'Tercero Basico' THEN 3\r\n        WHEN grado = 'Cuarto Bachillerato' THEN 4\r\n        WHEN grado = 'Quinto Bachillerato' THEN 5\r\n        ELSE 1000\r\n    END asc, apellidos_alumno asc;", conexion);
+                SqlDataAdapter comando = new SqlDataAdapter("select id_alumno as 'Codigo',nombres_alumno AS 'Nombre',apellidos_alumno AS 'Apellido',grado AS 'Grado' from info_alumnos\r\nORDER BY \r\n    CASE \r\n        WHEN grado = 'Primero Básico' THEN 1\r\n        WHEN grado = 'Segundo Básico' THEN 2\r\n        WHEN grado = 'Tercero Básico' THEN 3\r\n        WHEN grado = 'Cuarto Bachillerato' THEN 4\r\n        WHEN grado = 'Quinto Bachillerato' THEN 5\r\n        ELSE 1000\r\n    END asc, apellidos_alumno asc;", conexion);
                 DataSet d = new DataSet();
                 comando.Fill(d, "nombre");
                 dataGridView1.DataSource = d.Tables["nombre"].DefaultView;
+
+
+                SqlCommand basico1 = new SqlCommand("SELECT COUNT(*) FROM info_alumnos WHERE grado = 'Primero Básico';", conexion);
+                SqlCommand basico2 = new SqlCommand("SELECT COUNT(*) FROM info_alumnos WHERE grado = 'Segundo Básico';", conexion);
+                SqlCommand basico3 = new SqlCommand("SELECT COUNT(*) FROM info_alumnos WHERE grado = 'Tercero Básico';", conexion);
+                SqlCommand basico4 = new SqlCommand("SELECT COUNT(*) FROM info_alumnos WHERE grado = 'Cuarto Bachillerato';", conexion);
+                SqlCommand basico5 = new SqlCommand("SELECT COUNT(*) FROM info_alumnos WHERE grado = 'Quinto Bachillerato';", conexion);
+                label5.Text = "Primero Básico: " + basico1.ExecuteScalar().ToString();
+                label6.Text = "Segundo Básico: " + basico2.ExecuteScalar().ToString();
+                label7.Text = "Tercero Básico: " + basico3.ExecuteScalar().ToString();
+                label9.Text = "Cuarto Bachillerato: " + basico4.ExecuteScalar().ToString();
+                label10.Text = "Quinto Bachillerato: " + basico5.ExecuteScalar().ToString();
             }
             catch (Exception ex)
             {
@@ -156,7 +168,7 @@ namespace Borrador3
             try
             {
                 conexion.Open();
-                SqlDataAdapter comando = new SqlDataAdapter("select id_alumno as 'Codigo',nombres_alumno AS 'Nombre',apellidos_alumno AS 'Apellido',grado AS 'Grado' from info_alumnos where grado = '"+comboBox2.SelectedItem.ToString()+"'\r\nORDER BY \r\n    CASE \r\n        WHEN grado = 'Primero Basico' THEN 1\r\n        WHEN grado = 'Segundo Basico' THEN 2\r\n        WHEN grado = 'Tercero Basico' THEN 3\r\n        WHEN grado = 'Cuarto Bachillerato' THEN 4\r\n        WHEN grado = 'Quinto Bachillerato' THEN 5\r\n        ELSE 1000\r\n    END asc, apellidos_alumno asc;", conexion);
+                SqlDataAdapter comando = new SqlDataAdapter("select id_alumno as 'Codigo',nombres_alumno AS 'Nombre',apellidos_alumno AS 'Apellido',grado AS 'Grado' from info_alumnos where grado = '"+comboBox2.SelectedItem.ToString()+"'\r\nORDER BY \r\n    CASE \r\n        WHEN grado = 'Primero Básico' THEN 1\r\n        WHEN grado = 'Segundo Básico' THEN 2\r\n        WHEN grado = 'Tercero Básico' THEN 3\r\n        WHEN grado = 'Cuarto Bachillerato' THEN 4\r\n        WHEN grado = 'Quinto Bachillerato' THEN 5\r\n        ELSE 1000\r\n    END asc, apellidos_alumno asc;", conexion);
                 DataSet d = new DataSet();
                 comando.Fill(d, "nombre");
                 dataGridView1.DataSource = d.Tables["nombre"].DefaultView;
@@ -174,6 +186,11 @@ namespace Borrador3
         {
             registros();
             comboBox2.SelectedIndex = 0; // Deseleccionar cualquier selección en el ComboBox
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
