@@ -75,10 +75,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(-1, 170);
+            this.dataGridView1.Location = new System.Drawing.Point(10, 170);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(968, 385);
+            this.dataGridView1.Size = new System.Drawing.Size(944, 373);
             this.dataGridView1.TabIndex = 8;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
@@ -254,9 +254,9 @@
             this.comboBox1.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.comboBox1.Items.AddRange(new object[] {
             "Todos",
-            "Primero Basico",
-            "Segundo Basico",
-            "Tercero Basico",
+            "Primero Básico",
+            "Segundo Básico",
+            "Tercero Básico",
             "Cuarto Bachillerato",
             "Quinto Bachillerato"});
             this.comboBox1.Location = new System.Drawing.Point(346, 105);
