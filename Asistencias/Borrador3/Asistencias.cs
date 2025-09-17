@@ -12,7 +12,7 @@ namespace Borrador3
         //Cambiar a la ip de Beatriz (o configurar el server de la miss a esta ip y puerto)
         String consultafiltro = "SELECT a.nombres_alumno AS 'Nombre',a.apellidos_alumno AS 'Apellido', a.grado AS 'Grado', s.fecha AS 'Fecha',s.estado AS 'Presente' from info_alumnos a INNER JOIN asistencias s ON a.id_alumno = s.id_alumno ";
         int count;
-        SqlConnection conexion = new SqlConnection("Data Source=192.168.0.37,49172;Initial Catalog=asistencias_control;User ID = dario2;Password = admin");
+        SqlConnection conexion = new SqlConnection("Data Source=localhost\\SQLEXPRESS;Initial Catalog=asistencias_control;Integrated Security =True");
         public Asistencias()
         {
             InitializeComponent();

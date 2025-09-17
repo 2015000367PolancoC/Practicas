@@ -1,19 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 namespace Borrador3
 {
     public partial class Alumnos : Form
     {
-        SqlConnection conexion = new SqlConnection("Data Source=192.168.0.37,49172;Initial Catalog=asistencias_control;User ID = dario2;Password = admin");
+        SqlConnection conexion = new SqlConnection("Data Source=localhost\\SQLEXPRESS;Initial Catalog=asistencias_control;Integrated Security =True");
         private Asistencias asistenciasForm;
 
         public Alumnos(Asistencias asistencias)
@@ -191,6 +184,24 @@ namespace Borrador3
         private void label5_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Estas seguro? Esto pasara de año siguiente a todos los alumnos, y eliminara a todos los alumnos de Quinto Bachillerato", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogResult == DialogResult.Yes)
+            {
+                SqlCommand updateCmd1 = new SqlCommand("UPDATE info_alumnos set grado = 'Segundo Básico' WHERE grado = 'Primero Básico'", conexion);
+                SqlCommand updateCmd2 = new SqlCommand("UPDATE info_alumnos set grado = 'Tercero Básico' WHERE grado = 'Segundo Básico'", conexion);
+                SqlCommand updateCmd3 = new SqlCommand("UPDATE info_alumnos set grado = 'Cuarto Bachillerato' WHERE grado = 'Tercero Básico'", conexion);
+                SqlCommand updateCmd4 = new SqlCommand("UPDATE info_alumnos set grado = 'Quinto Bachillerato' WHERE grado = 'Quinto Bachillerato'", conexion);
+                SqlCommand updateCmd5 = new SqlCommand("DELETE FROM info_alumnos WHERE grado = 'Quinto Bachillerato", conexion);
+                updateCmd1.ExecuteNonQuery();
+                updateCmd2.ExecuteNonQuery();
+                updateCmd3.ExecuteNonQuery();
+                updateCmd4.ExecuteNonQuery();
+                updateCmd5.ExecuteNonQuery();
+            }
         }
     }
 }
