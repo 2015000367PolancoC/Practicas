@@ -1,0 +1,15 @@
+C:\Users\Lab\Downloads\Practicas-main\Practicas-main\Pagos & Inscripciones\guia1unidad3\bin\Debug\Borrador4.exe.config
+C:\Users\Lab\Downloads\Practicas-main\Practicas-main\Pagos & Inscripciones\guia1unidad3\bin\Debug\Borrador4.exe
+C:\Users\Lab\Downloads\Practicas-main\Practicas-main\Pagos & Inscripciones\guia1unidad3\bin\Debug\Borrador4.pdb
+C:\Users\Lab\Downloads\Practicas-main\Practicas-main\Pagos & Inscripciones\guia1unidad3\obj\Debug\Practica Borrador 4.csproj.AssemblyReference.cache
+C:\Users\Lab\Downloads\Practicas-main\Practicas-main\Pagos & Inscripciones\guia1unidad3\obj\Debug\Borrador4.Encargados.resources
+C:\Users\Lab\Downloads\Practicas-main\Practicas-main\Pagos & Inscripciones\guia1unidad3\obj\Debug\Borrador4.Alumnos.resources
+C:\Users\Lab\Downloads\Practicas-main\Practicas-main\Pagos & Inscripciones\guia1unidad3\obj\Debug\Borrador4.cp.resources
+C:\Users\Lab\Downloads\Practicas-main\Practicas-main\Pagos & Inscripciones\guia1unidad3\obj\Debug\Borrador4.Inscripciones.resources
+C:\Users\Lab\Downloads\Practicas-main\Practicas-main\Pagos & Inscripciones\guia1unidad3\obj\Debug\Borrador4.Menu.resources
+C:\Users\Lab\Downloads\Practicas-main\Practicas-main\Pagos & Inscripciones\guia1unidad3\obj\Debug\Borrador4.Properties.Resources.resources
+C:\Users\Lab\Downloads\Practicas-main\Practicas-main\Pagos & Inscripciones\guia1unidad3\obj\Debug\Practica Borrador 4.csproj.GenerateResource.cache
+C:\Users\Lab\Downloads\Practicas-main\Practicas-main\Pagos & Inscripciones\guia1unidad3\obj\Debug\Practica Borrador 4.csproj.CoreCompileInputs.cache
+C:\Users\Lab\Downloads\Practicas-main\Practicas-main\Pagos & Inscripciones\guia1unidad3\obj\Debug\Borrador4.exe
+C:\Users\Lab\Downloads\Practicas-main\Practicas-main\Pagos & Inscripciones\guia1unidad3\obj\Debug\Borrador4.pdb
+C:\Users\Lab\Downloads\Practicas-main\Practicas-main\Pagos & Inscripciones\guia1unidad3\obj\Debug\Borrador4.exe.config
