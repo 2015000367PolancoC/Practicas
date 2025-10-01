@@ -13,3 +13,49 @@ C:\Users\Lab\Downloads\Practicas-main\Practicas-main\Pagos & Inscripciones\guia1
 C:\Users\Lab\Downloads\Practicas-main\Practicas-main\Pagos & Inscripciones\guia1unidad3\obj\Debug\Borrador4.exe
 C:\Users\Lab\Downloads\Practicas-main\Practicas-main\Pagos & Inscripciones\guia1unidad3\obj\Debug\Borrador4.pdb
 C:\Users\Lab\Downloads\Practicas-main\Practicas-main\Pagos & Inscripciones\guia1unidad3\obj\Debug\Borrador4.exe.config
+C:\Users\sebas\Desktop\New folder\Practicas-main\Pagos & Inscripciones\nuevo\guia1unidad3\bin\Debug\Borrador4.exe.config
+C:\Users\sebas\Desktop\New folder\Practicas-main\Pagos & Inscripciones\nuevo\guia1unidad3\bin\Debug\Borrador4.exe
+C:\Users\sebas\Desktop\New folder\Practicas-main\Pagos & Inscripciones\nuevo\guia1unidad3\bin\Debug\Borrador4.pdb
+C:\Users\sebas\Desktop\New folder\Practicas-main\Pagos & Inscripciones\nuevo\guia1unidad3\obj\Debug\Practica Borrador 4.csproj.AssemblyReference.cache
+C:\Users\sebas\Desktop\New folder\Practicas-main\Pagos & Inscripciones\nuevo\guia1unidad3\obj\Debug\Borrador4.exe.config
+C:\Users\sebas\Desktop\New folder\Practicas-main\Pagos & Inscripciones\nuevo\guia1unidad3\obj\Debug\Borrador4.Alumnos.resources
+C:\Users\sebas\Desktop\New folder\Practicas-main\Pagos & Inscripciones\nuevo\guia1unidad3\obj\Debug\Borrador4.cp.resources
+C:\Users\sebas\Desktop\New folder\Practicas-main\Pagos & Inscripciones\nuevo\guia1unidad3\obj\Debug\Borrador4.Inscripciones.resources
+C:\Users\sebas\Desktop\New folder\Practicas-main\Pagos & Inscripciones\nuevo\guia1unidad3\obj\Debug\Borrador4.Menu.resources
+C:\Users\sebas\Desktop\New folder\Practicas-main\Pagos & Inscripciones\nuevo\guia1unidad3\obj\Debug\Borrador4.Properties.Resources.resources
+C:\Users\sebas\Desktop\New folder\Practicas-main\Pagos & Inscripciones\nuevo\guia1unidad3\obj\Debug\Practica Borrador 4.csproj.GenerateResource.cache
+C:\Users\sebas\Desktop\New folder\Practicas-main\Pagos & Inscripciones\nuevo\guia1unidad3\obj\Debug\Practica Borrador 4.csproj.CoreCompileInputs.cache
+C:\Users\sebas\Desktop\New folder\Practicas-main\Pagos & Inscripciones\nuevo\guia1unidad3\obj\Debug\Borrador4.exe
+C:\Users\sebas\Desktop\New folder\Practicas-main\Pagos & Inscripciones\nuevo\guia1unidad3\obj\Debug\Borrador4.pdb
+D:\Nueva carpeta\luis\guia1unidad3\obj\Debug\Practica Borrador 4.csproj.AssemblyReference.cache
+D:\Nueva carpeta\luis\guia1unidad3\obj\Debug\Borrador4.exe.config
+D:\Nueva carpeta\luis\guia1unidad3\obj\Debug\Borrador4.Alumnos.resources
+D:\Nueva carpeta\luis\guia1unidad3\obj\Debug\Borrador4.cp.resources
+D:\Nueva carpeta\luis\guia1unidad3\obj\Debug\Borrador4.Inscripciones.resources
+D:\Nueva carpeta\luis\guia1unidad3\obj\Debug\Borrador4.Menu.resources
+D:\Nueva carpeta\luis\guia1unidad3\obj\Debug\Borrador4.Properties.Resources.resources
+D:\Nueva carpeta\luis\guia1unidad3\obj\Debug\Practica Borrador 4.csproj.GenerateResource.cache
+D:\Nueva carpeta\luis\guia1unidad3\obj\Debug\Practica Borrador 4.csproj.CoreCompileInputs.cache
+D:\Nueva carpeta\luis\guia1unidad3\obj\Debug\Borrador4.exe
+D:\Nueva carpeta\luis\guia1unidad3\obj\Debug\Borrador4.pdb
+D:\Nueva carpeta\luis\guia1unidad3\bin\Debug\Borrador4.exe.config
+D:\Nueva carpeta\luis\guia1unidad3\bin\Debug\Borrador4.exe
+D:\Nueva carpeta\luis\guia1unidad3\bin\Debug\Borrador4.pdb
+G:\Nueva carpeta\luis\guia1unidad3\bin\Debug\Borrador4.exe.config
+G:\Nueva carpeta\luis\guia1unidad3\bin\Debug\Borrador4.exe
+G:\Nueva carpeta\luis\guia1unidad3\bin\Debug\Borrador4.pdb
+G:\Nueva carpeta\luis\guia1unidad3\obj\Debug\Practica Borrador 4.csproj.AssemblyReference.cache
+G:\Nueva carpeta\luis\guia1unidad3\obj\Debug\Borrador4.exe.config
+G:\Nueva carpeta\luis\guia1unidad3\obj\Debug\Borrador4.Alumnos.resources
+G:\Nueva carpeta\luis\guia1unidad3\obj\Debug\Borrador4.cp.resources
+G:\Nueva carpeta\luis\guia1unidad3\obj\Debug\Borrador4.Inscripciones.resources
+G:\Nueva carpeta\luis\guia1unidad3\obj\Debug\Borrador4.Menu.resources
+G:\Nueva carpeta\luis\guia1unidad3\obj\Debug\Borrador4.Properties.Resources.resources
+G:\Nueva carpeta\luis\guia1unidad3\obj\Debug\Practica Borrador 4.csproj.GenerateResource.cache
+G:\Nueva carpeta\luis\guia1unidad3\obj\Debug\Practica Borrador 4.csproj.CoreCompileInputs.cache
+G:\Nueva carpeta\luis\guia1unidad3\obj\Debug\Borrador4.exe
+G:\Nueva carpeta\luis\guia1unidad3\obj\Debug\Borrador4.pdb
+D:\Nueva carpeta\luis\guia1unidad3\obj\Debug\Borrador4.Resumen.resources
+G:\Nueva carpeta\luis\guia1unidad3\obj\Debug\Borrador4.Resumen.resources
+D:\Nueva carpeta\luis\guia1unidad3\obj\Debug\Borrador4.opciones.resources
+G:\Nueva carpeta\luis\guia1unidad3\obj\Debug\Borrador4.opciones.resources

@@ -22,5 +22,29 @@ namespace Borrador4.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int mensualidad {
+            get {
+                return ((int)(this["mensualidad"]));
+            }
+            set {
+                this["mensualidad"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("600")]
+        public int Inscripcion {
+            get {
+                return ((int)(this["Inscripcion"]));
+            }
+            set {
+                this["Inscripcion"] = value;
+            }
+        }
     }
 }

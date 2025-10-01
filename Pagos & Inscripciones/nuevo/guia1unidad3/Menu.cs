@@ -23,9 +23,10 @@ namespace Borrador4
             Alumnos v = new Alumnos();
             v.ShowDialog();
         }
-        private void encargadosToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void opcionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Encargados v = new Encargados();
+            opciones v = new opciones();
             v.ShowDialog();
         }
     }
