@@ -12,7 +12,7 @@ namespace Borrador3
         String consultafiltro = "SELECT a.nombres_alumno AS 'Nombre',a.apellidos_alumno AS 'Apellido', a.grado AS 'Grado', s.fecha AS 'Fecha',s.estado AS 'Presente' from info_alumnos a INNER JOIN asistencias s ON a.id_alumno = s.id_alumno ";
         int count;
         //SqlConnection conexion = new SqlConnection("Data Source=BEATRIZ,1433;Initial Catalog=asistencias_control;User ID = user;Password = admin");
-        SqlConnection conexion = new SqlConnection("Data Source=192.168.68.51,9898;Initial Catalog=registros;User ID = gary; Password = zY-Oh_vQzPc[FYWf");
+        SqlConnection conexion = new SqlConnection("Data Source=localhost\\SQLEXPRESS;Initial Catalog=asistencias_control;Integrated Security = true;");
         public Asistencias()
         {
             InitializeComponent();

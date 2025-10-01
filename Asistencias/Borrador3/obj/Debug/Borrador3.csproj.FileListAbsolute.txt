@@ -97,3 +97,18 @@ D:\Nueva carpeta\Borrador3\obj\Debug\Borrador3.csproj.CoreCompileInputs.cache
 D:\Nueva carpeta\Borrador3\obj\Debug\Borrador3.csproj.Up2Date
 D:\Nueva carpeta\Borrador3\obj\Debug\Borrador3.exe
 D:\Nueva carpeta\Borrador3\obj\Debug\Borrador3.pdb
+C:\Users\Lab\Desktop\Practicas-main\Asistencias\Borrador3\bin\Debug\Borrador3.exe.config
+C:\Users\Lab\Desktop\Practicas-main\Asistencias\Borrador3\bin\Debug\Borrador3.exe
+C:\Users\Lab\Desktop\Practicas-main\Asistencias\Borrador3\bin\Debug\Borrador3.pdb
+C:\Users\Lab\Desktop\Practicas-main\Asistencias\Borrador3\bin\Debug\EPPlus.dll
+C:\Users\Lab\Desktop\Practicas-main\Asistencias\Borrador3\bin\Debug\EPPlus.xml
+C:\Users\Lab\Desktop\Practicas-main\Asistencias\Borrador3\obj\Debug\Borrador3.csproj.AssemblyReference.cache
+C:\Users\Lab\Desktop\Practicas-main\Asistencias\Borrador3\obj\Debug\Borrador3.exe.config
+C:\Users\Lab\Desktop\Practicas-main\Asistencias\Borrador3\obj\Debug\Borrador3.Alumnos.resources
+C:\Users\Lab\Desktop\Practicas-main\Asistencias\Borrador3\obj\Debug\Borrador3.Asistencias.resources
+C:\Users\Lab\Desktop\Practicas-main\Asistencias\Borrador3\obj\Debug\Borrador3.Properties.Resources.resources
+C:\Users\Lab\Desktop\Practicas-main\Asistencias\Borrador3\obj\Debug\Borrador3.csproj.GenerateResource.cache
+C:\Users\Lab\Desktop\Practicas-main\Asistencias\Borrador3\obj\Debug\Borrador3.csproj.CoreCompileInputs.cache
+C:\Users\Lab\Desktop\Practicas-main\Asistencias\Borrador3\obj\Debug\Borrador3.csproj.Up2Date
+C:\Users\Lab\Desktop\Practicas-main\Asistencias\Borrador3\obj\Debug\Borrador3.exe
+C:\Users\Lab\Desktop\Practicas-main\Asistencias\Borrador3\obj\Debug\Borrador3.pdb

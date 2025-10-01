@@ -8,7 +8,7 @@ namespace Borrador3
     public partial class Alumnos : Form
     {String consulta = "select id_alumno as 'Codigo',nombres_alumno AS 'Nombre',apellidos_alumno AS 'Apellido',grado AS 'Grado' from info_alumnos";
         //SqlConnection conexion = new SqlConnection("Data Source=BEATRIZ,1433;Initial Catalog=asistencias_control;User ID = user;Password = admin");
-        SqlConnection conexion = new SqlConnection("Data Source=192.168.68.51,9898;Initial Catalog=registros;User ID = gary; Password = zY-Oh_vQzPc[FYWf");
+        SqlConnection conexion = new SqlConnection("Data Source=localhost\\SQLEXPRESS;Initial Catalog=asistencias_control;Integrated Security = true;");
         private Asistencias asistenciasForm;
 
         public Alumnos(Asistencias asistencias)
@@ -180,7 +180,7 @@ namespace Borrador3
         private void btnLimpiarFiltro_Click(object sender, EventArgs e)
         {
             registros(consulta);
-            comboBox2.SelectedIndex = 0; // Deseleccionar cualquier selección en el ComboBox
+            comboBox2.SelectedIndex = 0;
         }
 
         private void label5_Click(object sender, EventArgs e)
@@ -193,16 +193,12 @@ namespace Borrador3
             DialogResult dialogResult = MessageBox.Show("Estas seguro? Esto pasara de año siguiente a todos los alumnos, y eliminara a todos los alumnos de Quinto Bachillerato", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.Yes)
             {
-                SqlCommand updateCmd1 = new SqlCommand("UPDATE info_alumnos set grado = 'Segundo Básico' WHERE grado = 'Primero Básico'", conexion);
-                SqlCommand updateCmd2 = new SqlCommand("UPDATE info_alumnos set grado = 'Tercero Básico' WHERE grado = 'Segundo Básico'", conexion);
-                SqlCommand updateCmd3 = new SqlCommand("UPDATE info_alumnos set grado = 'Cuarto Bachillerato' WHERE grado = 'Tercero Básico'", conexion);
-                SqlCommand updateCmd4 = new SqlCommand("UPDATE info_alumnos set grado = 'Quinto Bachillerato' WHERE grado = 'Quinto Bachillerato'", conexion);
-                SqlCommand updateCmd5 = new SqlCommand("DELETE FROM info_alumnos WHERE grado = 'Quinto Bachillerato", conexion);
-                updateCmd5.ExecuteNonQuery();
-                updateCmd4.ExecuteNonQuery();
-                updateCmd3.ExecuteNonQuery();
-                updateCmd2.ExecuteNonQuery();
-                updateCmd1.ExecuteNonQuery();
+                SqlCommand updateCmd = new SqlCommand("UPDATE info_alumnos set grado = 'Segundo Básico' WHERE grado = 'Primero Básico';" +
+                                                    "UPDATE info_alumnos set grado = 'Tercero Básico' WHERE grado = 'Segundo Básico';" +
+                                                    "UPDATE info_alumnos set grado = 'Cuarto Bachillerato' WHERE grado = 'Tercero Básico';" +
+                                                    "UPDATE info_alumnos set grado = 'Quinto Bachillerato' WHERE grado = 'Cuarto Bachillerato';" +
+                                                    "DELETE FROM info_alumnos WHERE grado = 'Quinto Bachillerato", conexion);
+                updateCmd.ExecuteNonQuery();
             }
         }
 
