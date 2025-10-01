@@ -64,6 +64,7 @@
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
@@ -77,7 +78,6 @@
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(12, 166);
             this.dataGridView1.Name = "dataGridView1";
@@ -89,7 +89,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(9, 122);
+            this.button2.Location = new System.Drawing.Point(9, 131);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 2;
@@ -100,7 +100,7 @@
             // button3
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Location = new System.Drawing.Point(784, 125);
+            this.button3.Location = new System.Drawing.Point(784, 131);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 3;
@@ -111,7 +111,7 @@
             // button4
             // 
             this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.Location = new System.Drawing.Point(865, 125);
+            this.button4.Location = new System.Drawing.Point(865, 131);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 4;
@@ -139,7 +139,7 @@
             // 
             this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox4.Location = new System.Drawing.Point(825, 99);
+            this.textBox4.Location = new System.Drawing.Point(825, 105);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(115, 20);
             this.textBox4.TabIndex = 8;
@@ -175,7 +175,7 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(779, 102);
+            this.label4.Location = new System.Drawing.Point(779, 108);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(40, 13);
             this.label4.TabIndex = 12;
@@ -199,12 +199,13 @@
             // groupBox3
             // 
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.checkBox2);
             this.groupBox3.Controls.Add(this.btnLimpiarFiltro);
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Controls.Add(this.comboBox2);
             this.groupBox3.Location = new System.Drawing.Point(763, 14);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(186, 74);
+            this.groupBox3.Size = new System.Drawing.Size(186, 91);
             this.groupBox3.TabIndex = 14;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Filtrar";
@@ -286,7 +287,7 @@
             this.checkBox1.AutoSize = true;
             this.checkBox1.Checked = true;
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(277, 43);
+            this.checkBox1.Location = new System.Drawing.Point(277, 47);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(56, 17);
             this.checkBox1.TabIndex = 19;
@@ -296,7 +297,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(331, 45);
+            this.label7.Location = new System.Drawing.Point(274, 72);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(43, 13);
             this.label7.TabIndex = 21;
@@ -305,7 +306,7 @@
             // textBox5
             // 
             this.textBox5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox5.Location = new System.Drawing.Point(380, 43);
+            this.textBox5.Location = new System.Drawing.Point(346, 69);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(46, 20);
             this.textBox5.TabIndex = 20;
@@ -376,7 +377,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(90, 122);
+            this.button1.Location = new System.Drawing.Point(90, 131);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 30;
@@ -386,7 +387,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(622, 125);
+            this.button5.Location = new System.Drawing.Point(622, 131);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 31;
@@ -396,7 +397,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(703, 119);
+            this.button6.Location = new System.Drawing.Point(703, 125);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 35);
             this.button6.TabIndex = 32;
@@ -416,13 +417,24 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(171, 122);
+            this.button8.Location = new System.Drawing.Point(171, 131);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(80, 23);
             this.button8.TabIndex = 34;
             this.button8.Text = "Reestablecer";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(6, 68);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(105, 17);
+            this.checkBox2.TabIndex = 15;
+            this.checkBox2.Text = "Ocultar inactivos";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
             // Alumnos
             // 
@@ -513,5 +525,6 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.CheckBox checkBox2;
     }
 }

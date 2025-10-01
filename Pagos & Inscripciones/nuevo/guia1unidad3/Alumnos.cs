@@ -6,14 +6,31 @@ namespace Borrador4
 {
     public partial class Alumnos : Form
     {
-        //SqlConnection conexion = new SqlConnection("Data Source=localhost\\SQLEXPRESS;Initial Catalog=registros;Integrated Security = true");
-        SqlConnection conexion = new SqlConnection("Data Source=192.168.68.51,9898;Initial Catalog=registros;User ID = gary; Password = zY-Oh_vQzPc[FYWf");
+        SqlConnection conexion = new SqlConnection("Data Source=localhost\\SQLEXPRESS;Initial Catalog=registros;Integrated Security = true");
+        //SqlConnection conexion = new SqlConnection("Data Source=192.168.68.51,9898;Initial Catalog=registros;User ID = gary; Password = zY-Oh_vQzPc[FYWf");
         public Alumnos()
         {
             InitializeComponent();
-            Registros(registro);
+            filtrar();
         }
         String registro = "select id AS 'Codigo',Activo,NombreEstudiante AS 'Nombre del Estudiante', ApellidoEstudiante AS 'Apellido del Estudiante',Grado,fechaNacimiento as 'Fecha de Nacimiento',CONCAT(beca,'%') AS '% Beca',direccion as 'Dirección',NombreCompletoE1 AS 'Nombre completo Encargado 1',NombreCompletoE2 AS 'Nombre completo Encargado 2',LEFT(telefonoE1,4) + '-' + RIGHT(telefonoE1,4) AS 'Telefono 1',LEFT(telefonoE2,4) + '-' + RIGHT(telefonoE2,4) AS 'Telefono 2' from alumno";
+        private void filtrar()
+        {
+            String filtro = "";
+            if (comboBox2.SelectedIndex >= 0 && checkBox2.Checked)
+            {
+                filtro += " WHERE Grado = '" + comboBox2.SelectedItem.ToString() + "' AND Activo = 1";
+            }
+            else if (comboBox2.SelectedIndex >= 0)
+            {
+                filtro += " WHERE Grado = '" + comboBox2.SelectedItem.ToString() + "'";
+            }
+            else if (checkBox2.Checked)
+            {
+                filtro += " WHERE Activo = 1";
+            }
+                Registros(registro + filtro);
+        }
         private void Registros(String query)
         {
             try
@@ -74,7 +91,7 @@ namespace Borrador4
             finally
             {
                 conexion.Close();
-                Registros(registro);
+                filtrar();
             }
         }
         private void button3_Click(object sender, EventArgs e)
@@ -112,7 +129,7 @@ namespace Borrador4
             finally
             {
                 conexion.Close();
-                Registros(registro);
+                filtrar();
             }
         }
         private void button4_Click(object sender, EventArgs e)
@@ -138,7 +155,7 @@ namespace Borrador4
             finally
             {
                 conexion.Close();
-                Registros(registro);
+                filtrar();
             }
         }
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -168,21 +185,32 @@ namespace Borrador4
         }
         private void Alumnos_Load(object sender, EventArgs e)
         {
+
+            for (int i = 0; i < dataGridView1.Columns.Count; i++)
+            {
+                dataGridView1.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
+            for (int i = 2; i <= 3; i++)
+            {
+                dataGridView1.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            }
+
+            filtrar();
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox2.SelectedIndex >= 0)
             {
-                Registros(registro + " WHERE Grado = '" + comboBox2.SelectedItem.ToString() + "'");
                 btnLimpiarFiltro.Enabled = true;
             }
+            filtrar();
         }
         private void btnLimpiarFiltro_Click(object sender, EventArgs e)
         {
-            Registros(registro);
             comboBox2.SelectedIndex = -1;
             btnLimpiarFiltro.Enabled = false;
+            filtrar();
         }
         private void label6_Click(object sender, EventArgs e)
         {
@@ -216,7 +244,7 @@ namespace Borrador4
                 updateCmd2.ExecuteNonQuery();
                 updateCmd1.ExecuteNonQuery();
                 conexion.Close();
-                Registros(registro);
+                filtrar();
             }
         }
 
@@ -229,7 +257,7 @@ namespace Borrador4
                 SqlCommand updateCmd = new SqlCommand("DELETE FROM alumno WHERE Activo = 0 ", conexion);
                 updateCmd.ExecuteNonQuery();
                 conexion.Close();
-                Registros(registro);
+                filtrar();
             }
         }
 
@@ -240,7 +268,12 @@ namespace Borrador4
 
         private void button8_Click(object sender, EventArgs e)
         {
-            Registros(registro);
+            filtrar();
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            filtrar();
         }
     }
 }

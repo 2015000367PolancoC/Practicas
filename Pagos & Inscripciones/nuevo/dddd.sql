@@ -247,6 +247,28 @@ create table pagos(
 	Agosto  decimal(10,2) default 0,
 	Septiembre  decimal(10,2) default 0,
 	Octubre  decimal(10,2) default 0,
+
+	EneroE bit DEFAULT 0,
+	FebreroE bit DEFAULT 0,
+	MarzoE bit DEFAULT 0,
+	AbrilE  bit DEFAULT 0,
+	MayoE  bit DEFAULT 0,
+	JunioE bit DEFAULT 0,
+	JulioE  bit DEFAULT 0,
+	AgostoE  bit DEFAULT 0,
+	SeptiembreE  bit DEFAULT 0,
+	OctubreE  bit DEFAULT 0,
+	EneroFE date,
+	FebreroFE date,
+	MarzoFE date,
+	AbrilFE  date,
+	MayoFE  date,
+	JunioFE date,
+	JulioFE  date,
+	AgostoFE  date,
+	SeptiembreFE  date,
+	OctubreFE  date,
+
 	Fechaentrega date,
 	Fechapago date,
 	idalumno int,
@@ -342,7 +364,7 @@ insert into pagos(idalumno,Enero,Febrero,Marzo,Abril,Mayo,Junio,Julio,Agosto,Sep
 ('82','50','50','50','50','50','50','50','50','0','0'),
 ('83','0','0','0','0','0','0','0','0','0','0'),
 ('84','50','50','50','50','50','50','50','50','50','50'),
-('85','50','505','50','50','50','50','50','50','50','50'),
+('85','50','50','50','50','50','50','50','50','50','50'),
 ('86','50','50','50','50','0','0','0','0','0','0'),
 ('87','50','50','50','50','50','50','50','50','0','0'),
 ('88','50','50','50','50','50','50','50','50','0','0'),
@@ -507,7 +529,11 @@ ApellidoEstudiante asc;
 --query para meter el id del nuevo alumno a inscripciones
 INSERT INTO inscripciones(idEstudiante) VALUES ((SELECT TOP 1 id FROM alumno ORDER BY id DESC))
 --query que se usa para el datagridview de inscripciones
-select NombreEstudiante as 'Nombre',ApellidoEstudiante as 'Apellido',DATEDIFF(YEAR,fechanacimiento,GETDATE()) AS 'Edad',fechanacimiento,CONCAT(beca,'%') as 'Beca',monto as 'Aporte',CASE WHEN 600 - monto < 0 THEN 0 ELSE 600 - monto END as 'Aporte pendiente',Fechapago as 'Fecha de pago',NombreCompletoE1 as 'Nombre de Encargado',NombreCompletoE2 as 'Nombre de Encargado',LEFT(telefonoE1,4) + '-' + RIGHT(telefonoE1,4) AS 'Telefono 1',LEFT(telefonoE2,4) + '-' + RIGHT(telefonoE2,4) AS 'Telefono 2' from inscripciones i 
+select NombreEstudiante as 'Nombre',ApellidoEstudiante as 'Apellido',DATEDIFF(YEAR,fechanacimiento,GETDATE()) AS 'Edad',fechanacimiento,CONCAT(beca,'%') as 'Beca',monto as 'Aporte',
+CASE 
+        WHEN grado = 'Cuarto Bachillerato' OR grado ='Quinto Bachillerato' THEN CASE WHEN 750 - monto < 0 THEN 0 ELSE 750 - monto END
+        ELSE CASE WHEN 600 - monto < 0 THEN 0 ELSE 600 - monto END END as 'Aporte pendiente',
+Fechapago as 'Fecha de pago',NombreCompletoE1 as 'Nombre de Encargado',NombreCompletoE2 as 'Nombre de Encargado',LEFT(telefonoE1,4) + '-' + RIGHT(telefonoE1,4) AS 'Telefono 1',LEFT(telefonoE2,4) + '-' + RIGHT(telefonoE2,4) AS 'Telefono 2' from inscripciones i 
 inner join alumno a on  i.idEstudiante = a.id
 
 --resumen de inscripciones
@@ -560,3 +586,4 @@ SELECT --*
 FROM [dbo].[alumno] as A 
 	INNER JOIN [dbo].[pagos] as P
 	ON A.id = P.idalumno
+		

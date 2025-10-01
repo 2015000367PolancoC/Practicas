@@ -59,3 +59,19 @@ D:\Nueva carpeta\luis\guia1unidad3\obj\Debug\Borrador4.Resumen.resources
 G:\Nueva carpeta\luis\guia1unidad3\obj\Debug\Borrador4.Resumen.resources
 D:\Nueva carpeta\luis\guia1unidad3\obj\Debug\Borrador4.opciones.resources
 G:\Nueva carpeta\luis\guia1unidad3\obj\Debug\Borrador4.opciones.resources
+C:\Users\Lab\Desktop\Practicas-main\Pagos & Inscripciones\nuevo\guia1unidad3\bin\Debug\Borrador4.exe.config
+C:\Users\Lab\Desktop\Practicas-main\Pagos & Inscripciones\nuevo\guia1unidad3\bin\Debug\Borrador4.exe
+C:\Users\Lab\Desktop\Practicas-main\Pagos & Inscripciones\nuevo\guia1unidad3\bin\Debug\Borrador4.pdb
+C:\Users\Lab\Desktop\Practicas-main\Pagos & Inscripciones\nuevo\guia1unidad3\obj\Debug\Practica Borrador 4.csproj.AssemblyReference.cache
+C:\Users\Lab\Desktop\Practicas-main\Pagos & Inscripciones\nuevo\guia1unidad3\obj\Debug\Borrador4.exe.config
+C:\Users\Lab\Desktop\Practicas-main\Pagos & Inscripciones\nuevo\guia1unidad3\obj\Debug\Borrador4.Alumnos.resources
+C:\Users\Lab\Desktop\Practicas-main\Pagos & Inscripciones\nuevo\guia1unidad3\obj\Debug\Borrador4.cp.resources
+C:\Users\Lab\Desktop\Practicas-main\Pagos & Inscripciones\nuevo\guia1unidad3\obj\Debug\Borrador4.Inscripciones.resources
+C:\Users\Lab\Desktop\Practicas-main\Pagos & Inscripciones\nuevo\guia1unidad3\obj\Debug\Borrador4.Menu.resources
+C:\Users\Lab\Desktop\Practicas-main\Pagos & Inscripciones\nuevo\guia1unidad3\obj\Debug\Borrador4.opciones.resources
+C:\Users\Lab\Desktop\Practicas-main\Pagos & Inscripciones\nuevo\guia1unidad3\obj\Debug\Borrador4.Properties.Resources.resources
+C:\Users\Lab\Desktop\Practicas-main\Pagos & Inscripciones\nuevo\guia1unidad3\obj\Debug\Borrador4.Resumen.resources
+C:\Users\Lab\Desktop\Practicas-main\Pagos & Inscripciones\nuevo\guia1unidad3\obj\Debug\Practica Borrador 4.csproj.GenerateResource.cache
+C:\Users\Lab\Desktop\Practicas-main\Pagos & Inscripciones\nuevo\guia1unidad3\obj\Debug\Practica Borrador 4.csproj.CoreCompileInputs.cache
+C:\Users\Lab\Desktop\Practicas-main\Pagos & Inscripciones\nuevo\guia1unidad3\obj\Debug\Borrador4.exe
+C:\Users\Lab\Desktop\Practicas-main\Pagos & Inscripciones\nuevo\guia1unidad3\obj\Debug\Borrador4.pdb

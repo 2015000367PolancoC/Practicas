@@ -9,8 +9,8 @@ namespace Borrador4
 {
     public partial class cp : Form
     {
-        //SqlConnection conexion = new SqlConnection("Data Source=localhost\\SQLEXPRESS;Initial Catalog=registros;Integrated Security = true");
-        SqlConnection conexion = new SqlConnection("Data Source=192.168.68.51,9898;Initial Catalog=registros;User ID = gary; Password = zY-Oh_vQzPc[FYWf");
+        SqlConnection conexion = new SqlConnection("Data Source=localhost\\SQLEXPRESS;Initial Catalog=registros;Integrated Security = true");
+        //SqlConnection conexion = new SqlConnection("Data Source=192.168.68.51,9898;Initial Catalog=registros;User ID = gary; Password = zY-Oh_vQzPc[FYWf");
         string consulta = "select NombreEstudiante AS 'Nombre del alumno',ApellidoEstudiante AS 'Apellido del alumno',DATEDIFF(YEAR,fechanacimiento,GETDATE()) AS 'Edad',CONCAT(beca,'%') AS '% Beca',Fechapago AS 'Fecha de pago',FechaEntrega AS 'Fecha de entrega',Enero,Febrero,Marzo,Abril,Mayo,Junio,Julio,Agosto,Septiembre,Octubre,(Enero+Febrero+Marzo+Abril+Mayo+Junio+Julio+Agosto+Septiembre+Octubre) as 'Total',alumno.id from alumno INNER JOIN pagos on alumno.id = pagos.idAlumno ";
         string[] meses = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre" };
         int idalumno;
@@ -18,14 +18,14 @@ namespace Borrador4
         public cp()
         {
             InitializeComponent();
-            Registros(consulta);
+            filtrar();
         }
-        private void Registros(String query)
+        private void Registros(String filtro)
         {
             try
             {
                 conexion.Open();
-                SqlDataAdapter DatosAlumnos = new SqlDataAdapter(query + " ORDER BY CASE WHEN grado = 'Primero Básico' THEN 1 WHEN grado = 'Segundo Básico' THEN 2 WHEN grado = 'Tercero Básico' THEN 3 WHEN grado = 'Cuarto Bachillerato' THEN 4 WHEN grado = 'Quinto Bachillerato' THEN 5 ELSE 1000 END asc, ApellidoEstudiante asc", conexion);
+                SqlDataAdapter DatosAlumnos = new SqlDataAdapter(consulta + filtro + " ORDER BY CASE WHEN grado = 'Primero Básico' THEN 1 WHEN grado = 'Segundo Básico' THEN 2 WHEN grado = 'Tercero Básico' THEN 3 WHEN grado = 'Cuarto Bachillerato' THEN 4 WHEN grado = 'Quinto Bachillerato' THEN 5 ELSE 1000 END asc, ApellidoEstudiante asc,NombreEstudiante asc", conexion);
                 DataSet d = new DataSet();
                 DatosAlumnos.Fill(d, "nombre");
                 dataGridView1.DataSource = d.Tables["nombre"].DefaultView;
@@ -77,16 +77,25 @@ namespace Borrador4
         private void filtrar()
         {
             string filtro = "";
+            int hoy = Int32.Parse(DateTime.Now.ToString("MM"));
             if (cbxFiltro1.SelectedIndex > 0 && cboxfiltro2.SelectedIndex == 0)
             {
                 filtro += "WHERE Grado = '" + cbxFiltro1.SelectedItem.ToString() + "'";
                 if (checkBox1.Checked)
                 {
-                    filtro += " AND Fechapago is null";
+                    filtro += " AND Fechapago is null" ;
                 }
                 if (checkBox2.Checked)
                 {
-                    filtro += " AND Fechaentrega is null";
+                    filtro += " AND Fechaentrega is null ";
+                }
+                if (checkBox3.Checked)
+                {
+                    filtro += $"AND {meses[hoy - 1]} != {mensualidad}";
+                }
+                if (checkBox4.Checked)
+                {
+                    filtro += " AND Activo = 1";
                 }
             }
             else if (cbxFiltro1.SelectedIndex == 0 && cboxfiltro2.SelectedIndex > 0)
@@ -104,6 +113,14 @@ namespace Borrador4
                 {
                     filtro += " AND " + cboxfiltro2.SelectedItem.ToString() + "E = 0";
                 }
+                if (checkBox3.Checked)
+                {
+                    filtro += " ";
+                }
+                if (checkBox4.Checked)
+                {
+                    filtro += " AND Activo = 1 ";
+                }
             }
             else if (cbxFiltro1.SelectedIndex > 0 && cboxfiltro2.SelectedIndex > 0)
             {
@@ -120,8 +137,16 @@ namespace Borrador4
                 {
                     filtro += " AND " + cboxfiltro2.SelectedItem.ToString() + "E = 0";
                 }
+                if (checkBox3.Checked)
+                {
+                    filtro += " ";
+                }
+                if (checkBox4.Checked)
+                {
+                    filtro += " AND Activo = 1 ";
+                }
             }
-            Registros(consulta + filtro);
+            Registros(filtro);
         }
         private void btnEnvio_Click(object sender, EventArgs e)
         {
@@ -225,7 +250,8 @@ namespace Borrador4
             {
                 if (cell.Value != null && decimal.TryParse(cell.Value.ToString(), out decimal valor) && valor >= mensualidad)
                 {
-                    MessageBox.Show("Este mes ya ha sido pagado"); return;
+                    MessageBox.Show("Este mes ya ha sido pagado");
+                    return;
                 }
             }
             pagar(monto, idalumno, mesInicio);
@@ -234,7 +260,32 @@ namespace Borrador4
         }
         private void button1_Click(object sender, EventArgs e)
         {
-
+            try
+             {
+                if (comboBox1.Text == "" || textBox3.Text == "")
+                {
+                    MessageBox.Show("Por favor, complete todos los campos.");
+                }
+                else
+                {
+                    String mesSel = meses[comboBox1.SelectedIndex];
+                    conexion.Open();
+                    SqlCommand cmd = new SqlCommand("UPDATE pagos SET "+mesSel+"= @monto WHERE idalumno=@idalumno", conexion);
+                    cmd.Parameters.AddWithValue("@monto", decimal.Parse(textBox3.Text));
+                    cmd.Parameters.AddWithValue("@idalumno", idalumno);
+                    MessageBox.Show("UPDATE Pagos SET " + meses[comboBox1.SelectedIndex] + " = "+textBox3.Text+" WHERE idalumno="+idalumno);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al consultar la base de datos: " + ex.Message);
+            }
+            finally
+            {
+                conexion.Close();
+                filtrar();
+            }
         }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -287,7 +338,15 @@ namespace Borrador4
         }
         private void cp_Load(object sender, EventArgs e)
         {
-            Registros(consulta);
+            for (int i = 0; i <= 1; i++)
+            {
+                dataGridView1.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            }
+            for (int i = 2; i < dataGridView1.Columns.Count; i++)
+            {
+                dataGridView1.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
+            filtrar();
             cbxFiltro1.SelectedIndex = 0;
             cboxfiltro2.SelectedIndex = 0;
         }
@@ -299,6 +358,48 @@ namespace Borrador4
 
         private void opcionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            filtrar();
+        }
+
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            filtrar();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (idalumno == 0)
+            {
+                MessageBox.Show("Seleccione un alumno.");
+                return;
+            }
+            if (dataGridView1.SelectedRows.Count > 1)
+            {
+                MessageBox.Show("Seleccionar solo 1 fila de meses a la vez");
+                return;
+            }
+            foreach (DataGridViewCell cell in dataGridView1.SelectedCells)
+            {
+
+                int mesIndex = cell.ColumnIndex - 6;
+                if (mesIndex >= 0 && mesIndex < meses.Length)
+                {
+                    string columnaBit = meses[mesIndex] + "E";
+                    string Fechas = meses[mesIndex] + "FE";
+                    string query = $"UPDATE pagos SET {columnaBit} = 0,{Fechas} = @fecha WHERE idalumno = @idalumno";
+                    conexion.Open();
+                    SqlCommand cmd = new SqlCommand(query, conexion);
+                    cmd.Parameters.AddWithValue("@fecha", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@idalumno", idalumno);
+                    cmd.ExecuteNonQuery();
+                    conexion.Close();
+                }
+            }
+            filtrar();
         }
     }
 }

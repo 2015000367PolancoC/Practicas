@@ -25,7 +25,7 @@ namespace Borrador4.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        [global::System.Configuration.DefaultSettingValueAttribute("75")]
         public int mensualidad {
             get {
                 return ((int)(this["mensualidad"]));
@@ -37,13 +37,61 @@ namespace Borrador4.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("600")]
-        public int Inscripcion {
+        [global::System.Configuration.DefaultSettingValueAttribute("675")]
+        public int InscripcionBAS1 {
             get {
-                return ((int)(this["Inscripcion"]));
+                return ((int)(this["InscripcionBAS1"]));
             }
             set {
-                this["Inscripcion"] = value;
+                this["InscripcionBAS1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("700")]
+        public int InscripcionBAC1 {
+            get {
+                return ((int)(this["InscripcionBAC1"]));
+            }
+            set {
+                this["InscripcionBAC1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2025-12-01")]
+        public global::System.DateTime FechaMora {
+            get {
+                return ((global::System.DateTime)(this["FechaMora"]));
+            }
+            set {
+                this["FechaMora"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("775")]
+        public int InscripcionBAS2 {
+            get {
+                return ((int)(this["InscripcionBAS2"]));
+            }
+            set {
+                this["InscripcionBAS2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("800")]
+        public int InscripcionBAC2 {
+            get {
+                return ((int)(this["InscripcionBAC2"]));
+            }
+            set {
+                this["InscripcionBAC2"] = value;
             }
         }
     }
