@@ -67,3 +67,33 @@ C:\Users\Lab\Downloads\Practi\Practicas-main\Asistencias\Borrador3\obj\Debug\Bor
 C:\Users\Lab\Downloads\Practi\Practicas-main\Asistencias\Borrador3\obj\Debug\Borrador3.csproj.Up2Date
 C:\Users\Lab\Downloads\Practi\Practicas-main\Asistencias\Borrador3\obj\Debug\Borrador3.exe
 C:\Users\Lab\Downloads\Practi\Practicas-main\Asistencias\Borrador3\obj\Debug\Borrador3.pdb
+G:\Nueva carpeta\Borrador3\bin\Debug\Borrador3.exe.config
+G:\Nueva carpeta\Borrador3\bin\Debug\Borrador3.exe
+G:\Nueva carpeta\Borrador3\bin\Debug\Borrador3.pdb
+G:\Nueva carpeta\Borrador3\bin\Debug\EPPlus.dll
+G:\Nueva carpeta\Borrador3\bin\Debug\EPPlus.xml
+G:\Nueva carpeta\Borrador3\obj\Debug\Borrador3.csproj.AssemblyReference.cache
+G:\Nueva carpeta\Borrador3\obj\Debug\Borrador3.exe.config
+G:\Nueva carpeta\Borrador3\obj\Debug\Borrador3.Alumnos.resources
+G:\Nueva carpeta\Borrador3\obj\Debug\Borrador3.Asistencias.resources
+G:\Nueva carpeta\Borrador3\obj\Debug\Borrador3.Properties.Resources.resources
+G:\Nueva carpeta\Borrador3\obj\Debug\Borrador3.csproj.GenerateResource.cache
+G:\Nueva carpeta\Borrador3\obj\Debug\Borrador3.csproj.CoreCompileInputs.cache
+G:\Nueva carpeta\Borrador3\obj\Debug\Borrador3.csproj.Up2Date
+G:\Nueva carpeta\Borrador3\obj\Debug\Borrador3.exe
+G:\Nueva carpeta\Borrador3\obj\Debug\Borrador3.pdb
+D:\Nueva carpeta\Borrador3\bin\Debug\Borrador3.exe.config
+D:\Nueva carpeta\Borrador3\bin\Debug\Borrador3.exe
+D:\Nueva carpeta\Borrador3\bin\Debug\Borrador3.pdb
+D:\Nueva carpeta\Borrador3\bin\Debug\EPPlus.dll
+D:\Nueva carpeta\Borrador3\bin\Debug\EPPlus.xml
+D:\Nueva carpeta\Borrador3\obj\Debug\Borrador3.csproj.AssemblyReference.cache
+D:\Nueva carpeta\Borrador3\obj\Debug\Borrador3.exe.config
+D:\Nueva carpeta\Borrador3\obj\Debug\Borrador3.Alumnos.resources
+D:\Nueva carpeta\Borrador3\obj\Debug\Borrador3.Asistencias.resources
+D:\Nueva carpeta\Borrador3\obj\Debug\Borrador3.Properties.Resources.resources
+D:\Nueva carpeta\Borrador3\obj\Debug\Borrador3.csproj.GenerateResource.cache
+D:\Nueva carpeta\Borrador3\obj\Debug\Borrador3.csproj.CoreCompileInputs.cache
+D:\Nueva carpeta\Borrador3\obj\Debug\Borrador3.csproj.Up2Date
+D:\Nueva carpeta\Borrador3\obj\Debug\Borrador3.exe
+D:\Nueva carpeta\Borrador3\obj\Debug\Borrador3.pdb

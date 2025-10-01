@@ -9,10 +9,10 @@ namespace Borrador3
 {
     public partial class Asistencias : Form
     {
-        //Cambiar a la ip de Beatriz (o configurar el server de la miss a esta ip y puerto)
         String consultafiltro = "SELECT a.nombres_alumno AS 'Nombre',a.apellidos_alumno AS 'Apellido', a.grado AS 'Grado', s.fecha AS 'Fecha',s.estado AS 'Presente' from info_alumnos a INNER JOIN asistencias s ON a.id_alumno = s.id_alumno ";
         int count;
-        SqlConnection conexion = new SqlConnection("Data Source=localhost\\SQLEXPRESS;Initial Catalog=asistencias_control;Integrated Security =True");
+        //SqlConnection conexion = new SqlConnection("Data Source=BEATRIZ,1433;Initial Catalog=asistencias_control;User ID = user;Password = admin");
+        SqlConnection conexion = new SqlConnection("Data Source=192.168.68.51,9898;Initial Catalog=registros;User ID = gary; Password = zY-Oh_vQzPc[FYWf");
         public Asistencias()
         {
             InitializeComponent();
@@ -79,7 +79,6 @@ namespace Borrador3
         private void limpiarregistros()
         {
             textBox3.Clear();
-            textBox4.Clear();
             comboBox2.SelectedIndex = 0;
             radioButton3.Checked = false;
             radioButton4.Checked = false;
@@ -91,7 +90,7 @@ namespace Borrador3
             comboBox2.SelectedIndex = 0;
         }
         private void ExportSqlTableToExcel(string filePath)
-        { //Creditos a so
+        {
             SqlDataAdapter da = new SqlDataAdapter(consultafiltro +
                         "ORDER BY fecha asc,\r\n" +
                         "    CASE \r\n" +
@@ -106,7 +105,7 @@ namespace Borrador3
             da.Fill(dt);
             using (var package = new ExcelPackage(new System.IO.FileInfo(filePath)))
             {
-                var worksheet = package.Workbook.Worksheets.FirstOrDefault();
+                var worksheet = package.Workbook.Worksheets.FirstOrDefault() ?? package.Workbook.Worksheets.Add("Datos Crudos");
 
                 for (int i = 0; i < dt.Columns.Count; i++)
                 {
@@ -172,7 +171,6 @@ namespace Borrador3
                         dataGridView1.ReadOnly = true;
                         btnVerReg.Enabled = false;
                         btnLimpiarReg.Enabled = true;
-                        //Workaround por que crashea si se abre mientras haya un filtro activo
                         btnAlumnos.Enabled = false;
                         radioButton3.Enabled = false;
                         radioButton4.Enabled = false;
@@ -186,7 +184,6 @@ namespace Borrador3
                         dataGridView1.ReadOnly = true;
                         btnVerReg.Enabled = false;
                         btnLimpiarReg.Enabled = true;
-                        //Workaround por que crashea si se abre mientras haya un filtro activo
                         btnAlumnos.Enabled = false;
                         radioButton3.Enabled = false;
                         radioButton4.Enabled = false;
@@ -203,7 +200,6 @@ namespace Borrador3
                         dataGridView1.ReadOnly = true;
                         btnVerReg.Enabled = false;
                         btnLimpiarReg.Enabled = true;
-                        //Workaround por que crashea si se abre mientras haya un filtro activo
                         btnAlumnos.Enabled = false;
                         radioButton3.Enabled = false;
                         radioButton4.Enabled = false;
@@ -217,7 +213,6 @@ namespace Borrador3
                         dataGridView1.ReadOnly = true;
                         btnVerReg.Enabled = false;
                         btnLimpiarReg.Enabled = true;
-                        //Workaround por que crashea si se abre mientras haya un filtro activo
                         btnAlumnos.Enabled = false;
                         radioButton3.Enabled = false;
                         radioButton4.Enabled = false;
@@ -233,7 +228,6 @@ namespace Borrador3
                 dataGridView1.ReadOnly = true;
                 btnVerReg.Enabled = false;
                 btnLimpiarReg.Enabled = true;
-                //Workaround por que crashea si se abre mientras haya un filtro activo
                 btnAlumnos.Enabled = false;
                 radioButton3.Enabled = false;
                 radioButton4.Enabled = false;
@@ -268,7 +262,6 @@ namespace Borrador3
             textBox2.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
 
             textBox3.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
-            textBox4.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -281,7 +274,6 @@ namespace Borrador3
                     string apellido = row.Cells["Apellido"].Value?.ToString();
                     string grado = row.Cells["Grado"].Value?.ToString();
                     bool presente = Convert.ToBoolean(row.Cells["estado"].Value);
-
                     int idAlumno = -1;
                     SqlCommand asignar = new SqlCommand("SELECT id_alumno FROM info_alumnos WHERE nombres_alumno=@nombre AND apellidos_alumno=@apellido AND grado=@grado", conexion);
                     asignar.Parameters.AddWithValue("@nombre", nombre);
@@ -289,7 +281,9 @@ namespace Borrador3
                     asignar.Parameters.AddWithValue("@grado", grado);
                     object result = asignar.ExecuteScalar();
                     if (result != null)
+                    {
                         idAlumno = Convert.ToInt32(result);
+                    }
                     if (idAlumno != -1)
                     {
                         SqlCommand seleccionar = new SqlCommand("SELECT COUNT(*) FROM asistencias WHERE id_alumno=@id AND fecha=@fecha", conexion);
@@ -385,7 +379,7 @@ namespace Borrador3
                 dateTimePicker1.Enabled = false;
             }
             else
-            {
+            { 
                 dateTimePicker1.Enabled = true;
             }
         }
@@ -422,7 +416,7 @@ namespace Borrador3
         {
             try
             {
-                filtrar("select nombres_alumno as 'Nombre',apellidos_alumno as 'Apellido',grado as 'Grado' from info_alumnos where nombres_alumno = '" + textBox1.Text + "' and apellidos_alumno = '" + textBox2.Text + "' ORDER BY ");
+                filtrar("select nombres_alumno as 'Nombre' ,apellidos_alumno as 'Apellido',grado as 'Grado' from info_alumnos where nombres_alumno like '%" + textBox3.Text + "%' COLLATE SQL_Latin1_General_CP1_CI_AI ORDER BY ");
                 agregarcolumna();
                 btnVerReg.Enabled = false;
                 btnLimpiarFiltro.Enabled = true;
@@ -431,6 +425,7 @@ namespace Borrador3
             {
                 MessageBox.Show("Error al consultar la base de datos: " + ex.Message);
             }
+                    
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)

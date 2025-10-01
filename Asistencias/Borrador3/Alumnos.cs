@@ -2,25 +2,27 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 namespace Borrador3
 {
     public partial class Alumnos : Form
-    {
-        SqlConnection conexion = new SqlConnection("Data Source=localhost\\SQLEXPRESS;Initial Catalog=asistencias_control;Integrated Security =True");
+    {String consulta = "select id_alumno as 'Codigo',nombres_alumno AS 'Nombre',apellidos_alumno AS 'Apellido',grado AS 'Grado' from info_alumnos";
+        //SqlConnection conexion = new SqlConnection("Data Source=BEATRIZ,1433;Initial Catalog=asistencias_control;User ID = user;Password = admin");
+        SqlConnection conexion = new SqlConnection("Data Source=192.168.68.51,9898;Initial Catalog=registros;User ID = gary; Password = zY-Oh_vQzPc[FYWf");
         private Asistencias asistenciasForm;
 
         public Alumnos(Asistencias asistencias)
         {
             InitializeComponent();
             asistenciasForm = asistencias;
-            registros();
+            registros(consulta);
         }
-        private void registros()
+        private void registros(String query)
         {
             try
             {
                 conexion.Open();
-                SqlDataAdapter comando = new SqlDataAdapter("select id_alumno as 'Codigo',nombres_alumno AS 'Nombre',apellidos_alumno AS 'Apellido',grado AS 'Grado' from info_alumnos\r\nORDER BY \r\n    CASE \r\n        WHEN grado = 'Primero Básico' THEN 1\r\n        WHEN grado = 'Segundo Básico' THEN 2\r\n        WHEN grado = 'Tercero Básico' THEN 3\r\n        WHEN grado = 'Cuarto Bachillerato' THEN 4\r\n        WHEN grado = 'Quinto Bachillerato' THEN 5\r\n        ELSE 1000\r\n    END asc, apellidos_alumno asc;", conexion);
+                SqlDataAdapter comando = new SqlDataAdapter(query + "\r\nORDER BY \r\n    CASE \r\n        WHEN grado = 'Primero Básico' THEN 1\r\n        WHEN grado = 'Segundo Básico' THEN 2\r\n        WHEN grado = 'Tercero Básico' THEN 3\r\n        WHEN grado = 'Cuarto Bachillerato' THEN 4\r\n        WHEN grado = 'Quinto Bachillerato' THEN 5\r\n        ELSE 1000\r\n    END asc, apellidos_alumno asc;", conexion);
                 DataSet d = new DataSet();
                 comando.Fill(d, "nombre");
                 dataGridView1.DataSource = d.Tables["nombre"].DefaultView;
@@ -73,7 +75,7 @@ namespace Borrador3
             finally
             {
                 conexion.Close();
-                registros();
+                registros(consulta);
             }
         }
         private void button3_Click(object sender, EventArgs e)
@@ -103,7 +105,7 @@ namespace Borrador3
             finally
             {
                 conexion.Close();
-                registros();
+                registros(consulta);
             }
         }
         private void button4_Click(object sender, EventArgs e)
@@ -129,7 +131,7 @@ namespace Borrador3
             finally
             {
                 conexion.Close();
-                registros();
+                registros(consulta);
             }
         }
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -177,7 +179,7 @@ namespace Borrador3
         }
         private void btnLimpiarFiltro_Click(object sender, EventArgs e)
         {
-            registros();
+            registros(consulta);
             comboBox2.SelectedIndex = 0; // Deseleccionar cualquier selección en el ComboBox
         }
 
@@ -196,11 +198,24 @@ namespace Borrador3
                 SqlCommand updateCmd3 = new SqlCommand("UPDATE info_alumnos set grado = 'Cuarto Bachillerato' WHERE grado = 'Tercero Básico'", conexion);
                 SqlCommand updateCmd4 = new SqlCommand("UPDATE info_alumnos set grado = 'Quinto Bachillerato' WHERE grado = 'Quinto Bachillerato'", conexion);
                 SqlCommand updateCmd5 = new SqlCommand("DELETE FROM info_alumnos WHERE grado = 'Quinto Bachillerato", conexion);
-                updateCmd1.ExecuteNonQuery();
-                updateCmd2.ExecuteNonQuery();
-                updateCmd3.ExecuteNonQuery();
-                updateCmd4.ExecuteNonQuery();
                 updateCmd5.ExecuteNonQuery();
+                updateCmd4.ExecuteNonQuery();
+                updateCmd3.ExecuteNonQuery();
+                updateCmd2.ExecuteNonQuery();
+                updateCmd1.ExecuteNonQuery();
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                registros("select id_alumno as 'Codigo',nombres_alumno as 'Nombre' ,apellidos_alumno as 'Apellido',grado as 'Grado' from info_alumnos where nombres_alumno like '%" + textBox1.Text + "%' COLLATE SQL_Latin1_General_CP1_CI_AI");
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al consultar la base de datos: " + ex.Message);
             }
         }
     }
