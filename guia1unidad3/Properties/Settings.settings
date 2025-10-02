@@ -1,0 +1,24 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Borrador4.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="mensualidad" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">75</Value>
+    </Setting>
+    <Setting Name="InscripcionBAS1" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">675</Value>
+    </Setting>
+    <Setting Name="InscripcionBAC1" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">700</Value>
+    </Setting>
+    <Setting Name="FechaMora" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">2025-12-01</Value>
+    </Setting>
+    <Setting Name="InscripcionBAS2" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">775</Value>
+    </Setting>
+    <Setting Name="InscripcionBAC2" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">800</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
