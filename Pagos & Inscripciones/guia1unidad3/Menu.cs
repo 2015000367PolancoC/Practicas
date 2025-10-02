@@ -1,7 +1,6 @@
-﻿using Borrador3;
-using System;
+﻿using System;
 using System.Windows.Forms;
-namespace guia1unidad3
+namespace Borrador4
 {
     public partial class Menu : Form
     {
@@ -24,9 +23,10 @@ namespace guia1unidad3
             Alumnos v = new Alumnos();
             v.ShowDialog();
         }
-        private void encargadosToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void opcionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Encargados v = new Encargados();
+            opciones v = new opciones();
             v.ShowDialog();
         }
     }

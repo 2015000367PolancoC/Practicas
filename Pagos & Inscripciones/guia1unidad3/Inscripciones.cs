@@ -1,169 +1,64 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Windows.Forms;
-namespace guia1unidad3
+namespace Borrador4
 {
     public partial class Inscripciones : Form
     {
-        SqlConnection conexion = new SqlConnection("Data Source=localhost\\SQLEXPRESS;Initial Catalog=registros;Integrated Security=True");
+        //SqlConnection conexion = new SqlConnection("Data Source=localhost\\SQLEXPRESS;Initial Catalog=registros;Integrated Security = true");
+        SqlConnection conexion = new SqlConnection("Data Source=192.168.68.51,9898;Initial Catalog=registros;User ID = gary; Password = zY-Oh_vQzPc[FYWf");
+        int inscripcionBS = 0, inscripcionBC = 0;
+        int idalumno;
         public Inscripciones()
         {
             InitializeComponent();
-            registros();
-            pago();
+            monto();
+            filtrar();
         }
-        int grado = 1;
-
-        private void registros()
+        private void monto()
         {
-            try
+            if (DateTime.Now < Properties.Settings.Default.FechaMora)
             {
-                conexion.Open();
-                SqlDataAdapter comando = new SqlDataAdapter("SELECT id as 'No. de Registro',FechaPago as 'Fecha de Pago',monto as 'Monto Pagado',NombreEstudiante as 'Nombre del Estudiante',ApellidoEstudiante as 'Apellidos del Estudiante',Grado,NombreEncargado as 'Nombre del Encargado',ApellidoEncargado as 'Apellido del Encargado',Direccion FROM inscripciones", conexion);
-                DataSet d = new DataSet();
-                comando.Fill(d, "nombre");
-                dataGridView1.DataSource = d.Tables["nombre"].DefaultView;
-
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al consultar la base de datos: " + ex.Message);
-            }
-            finally
-            {
-                conexion.Close();
-            }
-        }
-
-        private void pago()
-        {
-
-        }
-        private void button2_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (textBox1.Text == "" || textBox2.Text == "" || textBox3.Text == "" || textBox4.Text == "" || textBox5.Text == "" || comboBox1.Text == "Todos" || comboBox1.Text == "")
-                {
-                    MessageBox.Show("Por favor, complete todos los campos.");
-                }
-                else
-                {
-                    conexion.Open();
-                    SqlCommand comando = new SqlCommand("INSERT INTO inscripciones (FechaPago,monto,NombreEstudiante,ApellidoEstudiante,Grado,NombreEncargado,ApellidoEncargado,Direccion) VALUES (@FechaPago,@monto,@NombreEstudiante,@ApellidoEstudiante,@Grado,@NombreEncargado,@ApellidoEncargado,@Direccion)", conexion);
-                    comando.Parameters.AddWithValue("@FechaPago", dateTimePicker1.Value);
-                    comando.Parameters.AddWithValue("@monto", Convert.ToInt32(textBox3.Text));
-                    comando.Parameters.AddWithValue("@NombreEstudiante", textBox1.Text);
-                    comando.Parameters.AddWithValue("@ApellidoEstudiante", textBox2.Text);
-                    comando.Parameters.AddWithValue("@Grado", comboBox1.Text);
-                    comando.Parameters.AddWithValue("@NombreEncargado", textBox4.Text);
-                    comando.Parameters.AddWithValue("@ApellidoEncargado", textBox5.Text);
-                    comando.Parameters.AddWithValue("@Direccion", textBox6.Text);
-                    comando.ExecuteNonQuery();
-                    MessageBox.Show("Agregado exitosamente");
-                }
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al consultar la base de datos: " + ex.Message);
-            }
-            finally
-            {
-                conexion.Close();
-                registros();
-            }
-        }
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-
-
-        }
-        private void button3_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (textBox1.Text == "" || textBox2.Text == "" || textBox3.Text == "" || textBox4.Text == "" || textBox5.Text == "" || comboBox1.Text == "Todos")
-                {
-                    MessageBox.Show("Por favor, complete todos los campos.");
-                }
-                else
-                {
-                    conexion.Open();
-                    SqlCommand comando = new SqlCommand("UPDATE inscripciones set FechaPago = @FechaPago,monto = @monto,NombreEstudiante = @NombreEstudiante,ApellidoEstudiante = @ApellidoEstudiante,Grado = @Grado,NombreEncargado = @NombreEncargado,ApellidoEncargado = @ApellidoEncargado,Direccion = @Direccion WHERE ID = @ID", conexion);
-                    comando.Parameters.AddWithValue("@FechaPago", dateTimePicker1.Value);
-                    comando.Parameters.AddWithValue("@monto", Convert.ToDecimal(textBox3.Text));
-                    comando.Parameters.AddWithValue("@NombreEstudiante", textBox1.Text);
-                    comando.Parameters.AddWithValue("@ApellidoEstudiante", textBox2.Text);
-                    comando.Parameters.AddWithValue("@Grado", comboBox1.Text);
-                    comando.Parameters.AddWithValue("@NombreEncargado", textBox4.Text);
-                    comando.Parameters.AddWithValue("@ApellidoEncargado", textBox5.Text);
-                    comando.Parameters.AddWithValue("@Direccion", textBox6.Text);
-                    comando.Parameters.AddWithValue("@ID", textBox7.Text);
-                    comando.ExecuteNonQuery();
-                    MessageBox.Show("Actualizado exitosamente");
-                }
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al consultar la base de datos: " + ex.Message);
-            }
-            finally
-            {
-                conexion.Close();
-                registros();
-            }
-
-        }
-        private void button4_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox1.Checked)
-            {
-                dateTimePicker1.Value = DateTime.Now;
-                dateTimePicker1.Enabled = false;
+                inscripcionBS = Properties.Settings.Default.InscripcionBAS1;
+                inscripcionBC = Properties.Settings.Default.InscripcionBAC1;
             }
             else
             {
-                dateTimePicker1.Enabled = true;
+                inscripcionBS = Properties.Settings.Default.InscripcionBAS2;
+                inscripcionBC = Properties.Settings.Default.InscripcionBAC2;
             }
         }
-        private void button5_Click(object sender, EventArgs e)
+        private void filtrar()
         {
-            String consulta;
-            switch (comboBox1.SelectedIndex)
+            String filtro = "";
+            if (comboBox2.SelectedIndex > 0)
             {
-                case 0: grado = 0; break;
-                case 1: grado = 1; break;
-                case 2: grado = 2; break;
-                case 3: grado = 3; break;
-                case 4: grado = 4; break;
-                case 5: grado = 5; break;
-                default: grado = 1; break;
+                filtro += " where grado = '" + comboBox2.SelectedItem.ToString() + "'";
             }
-            switch (grado)
-            {
-                case 1: consulta = "SELECT id as 'No. de Registro',FechaPago as 'Fecha de Pago',monto as 'Monto Pagado',NombreEstudiante as 'Nombre del Estudiante',ApellidoEstudiante as 'Apellidos del Estudiante',Grado,NombreEncargado as 'Nombre del Encargado',ApellidoEncargado as 'Apellido del Encargado',Direccion FROM inscripciones WHERE Grado = 'Primero Básico';"; break;
-                case 2: consulta = "SELECT id as 'No. de Registro',FechaPago as 'Fecha de Pago',monto as 'Monto Pagado',NombreEstudiante as 'Nombre del Estudiante',ApellidoEstudiante as 'Apellidos del Estudiante',Grado,NombreEncargado as 'Nombre del Encargado',ApellidoEncargado as 'Apellido del Encargado',Direccion FROM inscripciones WHERE Grado = 'Segundo Básico';"; break;
-                case 3: consulta = "SELECT id as 'No. de Registro',FechaPago as 'Fecha de Pago',monto as 'Monto Pagado',NombreEstudiante as 'Nombre del Estudiante',ApellidoEstudiante as 'Apellidos del Estudiante',Grado,NombreEncargado as 'Nombre del Encargado',ApellidoEncargado as 'Apellido del Encargado',Direccion FROM inscripciones WHERE Grado = 'Tercero Básico';"; break;
-                case 4: consulta = "SELECT id as 'No. de Registro',FechaPago as 'Fecha de Pago',monto as 'Monto Pagado',NombreEstudiante as 'Nombre del Estudiante',ApellidoEstudiante as 'Apellidos del Estudiante',Grado,NombreEncargado as 'Nombre del Encargado',ApellidoEncargado as 'Apellido del Encargado',Direccion FROM inscripciones WHERE Grado = 'Cuarto Bachillerato';"; break;
-                case 5: consulta = "SELECT id as 'No. de Registro',FechaPago as 'Fecha de Pago',monto as 'Monto Pagado',NombreEstudiante as 'Nombre del Estudiante',ApellidoEstudiante as 'Apellidos del Estudiante',Grado,NombreEncargado as 'Nombre del Encargado',ApellidoEncargado as 'Apellido del Encargado',Direccion FROM inscripciones WHERE Grado = 'Quinto Bachillerato';"; break;
-                default: consulta = "SELECT id as 'No. de Registro',FechaPago as 'Fecha de Pago',monto as 'Monto Pagado',NombreEstudiante as 'Nombre del Estudiante',ApellidoEstudiante as 'Apellidos del Estudiante',Grado,NombreEncargado as 'Nombre del Encargado',ApellidoEncargado as 'Apellido del Encargado',Direccion FROM inscripciones;"; break;
-            }
-
+            Registros(filtro);
+        }
+        private void Registros(String filtro)
+        {
+            string consulta = "select NombreEstudiante as 'Nombre',ApellidoEstudiante as 'Apellido',DATEDIFF(YEAR,fechanacimiento,GETDATE()) AS 'Edad',fechanacimiento,CONCAT(beca,'%') as 'Beca',monto as 'Aporte',CASE WHEN grado = 'Cuarto Bachillerato' OR grado ='Quinto Bachillerato' THEN CASE WHEN " + inscripcionBC + " - monto < 0 THEN 0 ELSE " + inscripcionBC + " - monto END ELSE CASE WHEN " + inscripcionBS + " - monto < 0 THEN 0 ELSE " + inscripcionBS + " - monto END END as 'Aporte pendiente',Fechapago as 'Fecha de pago',NombreCompletoE1 as 'Nombre de Encargado',NombreCompletoE2 as 'Nombre de Encargado',LEFT(telefonoE1,4) + '-' + RIGHT(telefonoE1,4) AS 'Telefono 1',LEFT(telefonoE2,4) + '-' + RIGHT(telefonoE2,4) AS 'Telefono 2' from inscripciones i inner join alumno a on  i.idEstudiante = a.id";
             try
             {
                 conexion.Open();
-                SqlDataAdapter comando = new SqlDataAdapter(consulta, conexion);
+                SqlDataAdapter comando = new SqlDataAdapter(consulta + filtro + " ORDER BY CASE WHEN grado = 'Primero Básico' THEN 1 WHEN grado = 'Segundo Básico' THEN 2 WHEN grado = 'Tercero Básico' THEN 3 WHEN grado = 'Cuarto Bachillerato' THEN 4 WHEN grado = 'Quinto Bachillerato' THEN 5 ELSE 1000 END asc, ApellidoEstudiante asc,NombreEstudiante asc", conexion);
                 DataSet d = new DataSet();
                 comando.Fill(d, "nombre");
                 dataGridView1.DataSource = d.Tables["nombre"].DefaultView;
+
+                foreach (DataGridViewColumn column in dataGridView1.Columns)
+                {
+                    if (column.Index >= 5 && column.Index <= 6)
+                    {
+                        column.DefaultCellStyle.Font = new Font(dataGridView1.Font, FontStyle.Bold);
+                        column.DefaultCellStyle.Format = "C2";
+                        column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -174,28 +69,86 @@ namespace guia1unidad3
                 conexion.Close();
             }
         }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void btnPago_Click(object sender, EventArgs e)
         {
-            // MessageBox.Show(dataGridView1.Rows[e.RowIndex].ToString() + dataGridView1.Columns[e.ColumnIndex].ToString());
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0) {
-                textBox1.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-                textBox2.Text = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
-                textBox3.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-                textBox4.Text = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
-                textBox5.Text = dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString();
-                textBox6.Text = dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString();
-                textBox7.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
-                comboBox1.Text = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
-                dateTimePicker1.Value = (DateTime)dataGridView1.Rows[e.RowIndex].Cells[1].Value;
+            bool d = false;
+            if (!decimal.TryParse(textBox3.Text, out decimal monto) || monto <= 0)
+            {
+                MessageBox.Show("Ingrese un monto válido.");
+                return;
+            }
+            if (idalumno == 0)
+            {
+                MessageBox.Show("Seleccione un alumno.");
+                return;
+            }
+            try
+            {
+                /*if (monto > 600)
+                {
+                    d = true;
+                    monto = 600;
+                    pago.pagar(monto - 600, idalumno, 0);
+                    MessageBox.Show("Actualizado exitosamente, el monto extra se agrego a la mensualidad");
+                }*/
+                conexion.Open();
+                SqlCommand comando = new SqlCommand("UPDATE inscripciones set monto = monto + @monto WHERE idEstudiante = @id", conexion);
+                comando.Parameters.AddWithValue("@monto", monto);
+                comando.Parameters.AddWithValue("@id", idalumno);
+                comando.ExecuteNonQuery();
+                if (!d)
+                {
+                    MessageBox.Show("Actualizado exitosamente");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al procesar el pago: " + ex);
+            }
+            finally
+            {
+                conexion.Close();
+                filtrar();
             }
         }
-
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                idalumno = (int)dataGridView1.Rows[e.RowIndex].Cells[12].Value;
+                textBox1.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+                textBox2.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+                textBox4.Text = dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString();
+                textBox5.Text = dataGridView1.Rows[e.RowIndex].Cells[10].Value.ToString();
+            }
+        }
         private void Inscripciones_Load(object sender, EventArgs e)
         {
+            for (int i = 0; i <= 1; i++)
+            {
+                dataGridView1.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            }
+            for (int i = 2; i < dataGridView1.Columns.Count; i++)
+            {
+                dataGridView1.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
+            comboBox2.SelectedIndex = 0;
+        }
 
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            filtrar();
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            filtrar();
+        }
+
+        private void generarResumenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Resumen v = new Resumen("select Grado,count(activo) as 'Inscritos',SUM(monto) as 'Aporte',SUM(CASE WHEN " + 600 + " - monto < 0 THEN 0 ELSE " + 600 + " - monto END) as 'Aporte Pendiente' from alumno a inner join inscripciones i on i.idEstudiante = a.id group by ROLLUP(grado) ORDER BY CASE WHEN grado = 'Primero Básico' THEN 1 WHEN grado = 'Segundo Básico' THEN 2 WHEN grado = 'Tercero Básico' THEN 3 WHEN grado = 'Cuarto Bachillerato' THEN 4 WHEN grado = 'Quinto Bachillerato' THEN 5 ELSE 1000 END asc", 0);
+            v.ShowDialog();
         }
     }
 }
-
-//id as 'No. de Registro',FechaPago as 'Fecha de Pago',monto as 'Monto Pagado',NombreEstudiante as 'Nombre del Estudiante',ApellidoEstudiante as 'Apellidos del Estudiante',Grado,NombreEncargado as 'Nombre del Encargado',ApellidoEncargado as 'Apellido del Encargado',Direccion

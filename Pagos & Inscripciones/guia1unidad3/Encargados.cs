@@ -2,7 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
-namespace Borrador3
+namespace Borrador4
 {
     public partial class Encargados : Form
     {
@@ -11,14 +11,14 @@ namespace Borrador3
         public Encargados()
         {
             InitializeComponent();
-            registros();
+            Registros();
         }
-        private void registros()
+        private void Registros()
         {
             try
             {
                 conexion.Open();
-                SqlDataAdapter comando = new SqlDataAdapter("select NombreCompletoE1 AS 'Nombre completo Encargado 1',NombreCompletoE2 AS 'Nombre completo Encargado 2',telefonoE1 AS 'Telefono 1',telefonoE2 AS 'Telefono 2', a.NombreEstudiante + ' ' + a.ApellidoEstudiante AS 'Nombre estudiante' FROM encargado e\r\ninner join alumno a ON a.id = e.idalumno;", conexion);
+                SqlDataAdapter comando = new SqlDataAdapter("select e.id AS 'Codigo',NombreCompletoE1 AS 'Nombre completo Encargado 1',NombreCompletoE2 AS 'Nombre completo Encargado 2',LEFT(telefonoE1,4) + '-' + RIGHT(telefonoE1,4) AS 'Telefono 1',LEFT(telefonoE2,4) + '-' + RIGHT(telefonoE2,4) AS 'Telefono 2', a.NombreEstudiante + ' ' + a.ApellidoEstudiante AS 'Nombre estudiante' from encargado e INNER JOIN alumno a ON a.id = e.idalumno;;", conexion);
                 DataSet d = new DataSet();
                 comando.Fill(d, "nombre");
                 dataGridView1.DataSource = d.Tables["nombre"].DefaultView;
@@ -58,7 +58,7 @@ namespace Borrador3
             finally
             {
                 conexion.Close();
-                registros();
+                Registros();
             }
         }
         private void button3_Click(object sender, EventArgs e)
@@ -87,7 +87,7 @@ namespace Borrador3
             finally
             {
                 conexion.Close();
-                registros();
+                Registros();
             }
         }
         private void button4_Click(object sender, EventArgs e)
@@ -113,7 +113,7 @@ namespace Borrador3
             finally
             {
                 conexion.Close();
-                registros();
+                Registros();
             }
         }
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -156,7 +156,7 @@ namespace Borrador3
         }
         private void btnLimpiarFiltro_Click(object sender, EventArgs e)
         {
-            registros();
+            Registros();
         }
     }
 }
