@@ -421,7 +421,30 @@ namespace Borrador4
         }
         private void Guardar(string filePath)
         {
-            SqlDataAdapter da = new SqlDataAdapter("SELECT \r\n    NombreEstudiante + ApellidoEstudiante as 'Nombre',\r\n    (CASE WHEN Enero = 0 THEN 1 ELSE 0 END +\r\n     CASE WHEN Febrero = 0 THEN 1 ELSE 0 END +\r\n     CASE WHEN Marzo = 0 THEN 1 ELSE 0 END +\r\n     CASE WHEN Abril = 0 THEN 1 ELSE 0 END +\r\n     CASE WHEN Mayo = 0 THEN 1 ELSE 0 END +\r\n     CASE WHEN Junio = 0 THEN 1 ELSE 0 END +\r\n     CASE WHEN Julio = 0 THEN 1 ELSE 0 END +\r\n     CASE WHEN Agosto = 0 THEN 1 ELSE 0 END +\r\n     CASE WHEN Septiembre = 0 THEN 1 ELSE 0 END +\r\n     CASE WHEN Octubre = 0 THEN 1 ELSE 0 END\r\n    ) AS MesesNoPagados,\r\n    LTRIM(\r\n        (CASE WHEN Enero = 0 THEN ' Enero,' ELSE '' END) +\r\n        (CASE WHEN Febrero = 0 THEN ' Febrero,' ELSE '' END) +\r\n        (CASE WHEN Marzo = 0 THEN ' Marzo,' ELSE '' END) +\r\n        (CASE WHEN Abril = 0 THEN ' Abril,' ELSE '' END) +\r\n        (CASE WHEN Mayo = 0 THEN ' Mayo,' ELSE '' END) +\r\n        (CASE WHEN Junio = 0 THEN ' Junio,' ELSE '' END) +\r\n        (CASE WHEN Julio = 0 THEN ' Julio,' ELSE '' END) +\r\n        (CASE WHEN Agosto = 0 THEN ' Agosto,' ELSE '' END) +\r\n        (CASE WHEN Septiembre = 0 THEN ' Septiembre,' ELSE '' END) +\r\n        (CASE WHEN Octubre = 0 THEN ' Octubre,' ELSE '' END)\r\n    ) AS 'Lista Meses No Pagados'\r\nFROM pagos p inner join alumno a on p.idalumno = a.id\r\nORDER BY Nombre;", conexion);
+            string meses;
+            SqlDataAdapter da = new SqlDataAdapter("SELECT NombreEstudiante + ApellidoEstudiante as 'Nombre'," +
+                "(CASE WHEN Enero = 0 THEN 1 ELSE 0 END +" +
+                "CASE WHEN Febrero = 0 THEN 1 ELSE 0 END +" +
+                "CASE WHEN Marzo = 0 THEN 1 ELSE 0 END +" +
+                "CASE WHEN Abril = 0 THEN 1 ELSE 0 END +" +
+                "CASE WHEN Mayo = 0 THEN 1 ELSE 0 END +" +
+                "CASE WHEN Junio = 0 THEN 1 ELSE 0 END +" +
+                "CASE WHEN Julio = 0 THEN 1 ELSE 0 END +" +
+                "CASE WHEN Agosto = 0 THEN 1 ELSE 0 END +" +
+                "CASE WHEN Septiembre = 0 THEN 1 ELSE 0 END +" +
+                "CASE WHEN Octubre = 0 THEN 1 ELSE 0 END)" +
+                "AS MesesNoPagados,LTRIM(" +
+                "(CASE WHEN Enero = 0 THEN ' Enero,' ELSE '' END) +" +
+                "(CASE WHEN Febrero = 0 THEN ' Febrero,' ELSE '' END) +" +
+                "(CASE WHEN Marzo = 0 THEN ' Marzo,' ELSE '' END) +" +
+                "(CASE WHEN Abril = 0 THEN ' Abril,' ELSE '' END) +" +
+                "(CASE WHEN Mayo = 0 THEN ' Mayo,' ELSE '' END) +" +
+                "(CASE WHEN Junio = 0 THEN ' Junio,' ELSE '' END) +" +
+                "(CASE WHEN Julio = 0 THEN ' Julio,' ELSE '' END) +" +
+                "(CASE WHEN Agosto = 0 THEN ' Agosto,' ELSE '' END) +" +
+                "(CASE WHEN Septiembre = 0 THEN ' Septiembre,' ELSE '' END) +" +
+                "(CASE WHEN Octubre = 0 THEN ' Octubre,' ELSE '' END))" +
+                " AS 'Lista Meses No Pagados'FROM pagos p inner join alumno a on p.idalumno = a.idORDER BY Nombre;", conexion);
             DataTable dt = new DataTable();
             da.Fill(dt);
             using (ExcelPackage package = new ExcelPackage(new FileInfo(filePath)))
