@@ -1,8 +1,11 @@
 ﻿using OfficeOpenXml;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
+using OfficeOpenXml.Style;
+using OfficeOpenXml.Table;
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 namespace Borrador3
@@ -91,6 +94,10 @@ namespace Borrador3
         }
         private void ExportSqlTableToExcel(string filePath)
         {
+            Random r = new Random();
+            conexion.Open();
+            SqlCommand columnas = new SqlCommand("SELECT COUNT(*) FROM asistencias", conexion);
+            int col = Int32.Parse(columnas.ExecuteScalar().ToString());
             SqlDataAdapter da = new SqlDataAdapter(consultafiltro +
                         "ORDER BY fecha asc,\r\n" +
                         "    CASE \r\n" +
@@ -101,11 +108,16 @@ namespace Borrador3
                         "        WHEN grado = 'Quinto Bachillerato' THEN 5\r\n" +
                         "        ELSE 1000\r\n" +
                         "    END asc, apellidos_alumno asc;", conexion);
+            conexion.Close();
             DataTable dt = new DataTable();
             da.Fill(dt);
             using (var package = new ExcelPackage(new System.IO.FileInfo(filePath)))
             {
-                var worksheet = package.Workbook.Worksheets.FirstOrDefault() ?? package.Workbook.Worksheets.Add("Datos Crudos");
+                var worksheet = package.Workbook.Worksheets.Add("Datos Crudos " +DateTime.Now);
+                var table = worksheet.Tables.Add(worksheet.Cells["A1:E" + col+1], "Asistencias"+r.Next(10000));
+                table.ShowHeader = true;
+                table.ShowFirstColumn = true;
+                table.TableStyle = TableStyles.None;
 
                 for (int i = 0; i < dt.Columns.Count; i++)
                 {
@@ -118,6 +130,27 @@ namespace Borrador3
                         worksheet.Cells[x + 2, y + 1].Value = dt.Rows[x][y];
                     }
                 }
+                using (ExcelRange range = worksheet.Cells[1, 1, 1, dt.Columns.Count])
+                {
+                    range.Style.Font.Bold = true;
+                    range.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                    range.Style.Fill.BackgroundColor.SetColor(Color.LightBlue);
+                    range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    range.Style.Border.BorderAround(ExcelBorderStyle.Thin, Color.Black);
+                }
+                using (ExcelRange range = worksheet.Cells[1, 1, dt.Rows.Count + 1, dt.Columns.Count])
+                {
+                    range.Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                    range.Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                    range.Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                    range.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                }
+                using (ExcelRange range = worksheet.Cells[1, 1, dt.Rows.Count, dt.Columns.Count])
+                {
+                    range.Style.Numberformat.Format = "dd-MM-yyyy";
+
+                }
+                worksheet.Cells[worksheet.Dimension.Address].AutoFitColumns();
                 try
                 {
                     package.Save();
@@ -389,11 +422,11 @@ namespace Borrador3
             SaveFileDialog s = new SaveFileDialog();
             s.Filter = "Excel files (*.xlsx)|*.*";
             s.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            s.FileName = "Estadisticas.xlsm";
+            s.FileName = "Estadisticas "+DateTime.Now;
             if (s.ShowDialog() == DialogResult.OK)
             {
                 string filePath = s.FileName;
-                ExportSqlTableToExcel(filePath);
+                ExportSqlTableToExcel(filePath+".xlsx");
             }
         }
         private void button2_Click_1(object sender, EventArgs e)
@@ -427,7 +460,6 @@ namespace Borrador3
             }
                     
         }
-
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox2.Checked)
